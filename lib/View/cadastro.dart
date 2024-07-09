@@ -77,10 +77,11 @@ class CadastroState extends State<Cadastro> {
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                     onPressed: () => {
+                          cadastrarContato(),
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Busca()))
+                                  builder: (context) => const Busca())),
                         },
                     child: const SizedBox(
                       width: 200,
@@ -114,5 +115,7 @@ class CadastroState extends State<Cadastro> {
         nome: nome.text,
         email: telefone.text,
         telefone: telefone.text);
+
+    service.cadastrar(contato);
   }
 }
