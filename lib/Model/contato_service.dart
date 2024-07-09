@@ -16,4 +16,8 @@ class ContatoService {
     ];
     return contatos;
   }
+
+  // void cadastrar(Contato contato) {
+  //   contatos.add(contato);
+  // }
 }

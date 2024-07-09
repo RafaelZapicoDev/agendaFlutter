@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
+import 'package:recipes/Model/contato_service.dart';
 import 'package:recipes/View/busca.dart';
 import 'package:recipes/View/viewResources/barra_superior.dart';
 import 'package:recipes/View/viewResources/menu.dart';
@@ -105,9 +106,13 @@ class CadastroState extends State<Cadastro> {
       ),
     );
   }
-}
 
-void cadastrarContato(nome, email, telefone) {
-  Contato contato =
-      new Contato(nome: nome, email: telefone, telefone: telefone);
+  void cadastrarContato() {
+    ContatoService service = ContatoService();
+    Contato contato = Contato(
+        id: service.listarContato().length + 1,
+        nome: nome.text,
+        email: telefone.text,
+        telefone: telefone.text);
+  }
 }
