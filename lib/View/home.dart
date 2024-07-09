@@ -24,15 +24,10 @@ class HomeState extends State<Home> {
           child: Column(
         children: [
           Container(
-            color: const Color.fromARGB(255, 241, 208, 171),
             padding: const EdgeInsets.all(23),
             alignment: Alignment.center,
             child: Column(
               children: [
-                const Text(
-                  "Seja bem vindo",
-                  style: TextStyle(color: Colors.white, fontSize: 26),
-                ),
                 const Padding(padding: EdgeInsets.only(bottom: 15)),
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
