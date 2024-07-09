@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
-import 'package:recipes/View/home.dart';
+import 'package:recipes/View/cadastro.dart';
 import 'package:recipes/View/perfil.dart';
 import 'package:recipes/View/viewResources/barra_superior.dart';
 import 'package:recipes/View/viewResources/menu.dart';
@@ -23,8 +23,8 @@ class BuscaState extends State<Busca> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const Home()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Cadastro()));
           },
           backgroundColor: Colors.amber[600],
           child: const Icon(
@@ -39,7 +39,9 @@ class BuscaState extends State<Busca> {
               Contato contato = service.listarContato().elementAt(index);
 
               return Container(
-                  color: Colors.amber,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.amber),
                   padding: const EdgeInsets.all(10),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

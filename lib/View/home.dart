@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/View/busca.dart';
+import 'package:recipes/View/cadastro.dart';
 
 import 'package:recipes/View/viewResources/barra_superior.dart';
 import 'package:recipes/View/viewResources/menu.dart';
@@ -72,7 +73,7 @@ class HomeState extends State<Home> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Busca()))
+                                    builder: (context) => const Cadastro()))
                           },
                       child: const SizedBox(
                         width: 200,
