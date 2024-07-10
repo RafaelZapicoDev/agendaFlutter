@@ -26,7 +26,6 @@ class BuscaState extends State<Busca> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Cadastro()));
           },
-          backgroundColor: Colors.amber[600],
           child: const Icon(
             Icons.add,
             color: Colors.white,

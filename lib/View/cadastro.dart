@@ -3,6 +3,7 @@ import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
 import 'package:recipes/View/busca.dart';
 import 'package:recipes/View/viewResources/barra_superior.dart';
+import 'package:recipes/View/viewResources/input_text.dart';
 import 'package:recipes/View/viewResources/menu.dart';
 
 class Cadastro extends StatefulWidget {
@@ -32,45 +33,11 @@ class CadastroState extends State<Cadastro> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TextField(
-                controller: nome,
-                decoration: const InputDecoration(
-                    labelText: "Nome Completo",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 98, 160, 190))),
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 79, 126, 209))),
-              ),
+              InputText(controller: nome, label: "Nome"),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
-              TextField(
-                controller: email,
-                decoration: const InputDecoration(
-                    labelText: "Email",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 98, 160, 190))),
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 79, 126, 209))),
-              ),
+              InputText(controller: email, label: "Email"),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
-              TextField(
-                controller: telefone,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                    labelText: "Telefone / Celular",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 98, 160, 190))),
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 79, 126, 209))),
-              ),
+              InputText(controller: telefone, label: "Telefone"),
               const Padding(padding: EdgeInsets.only(bottom: 40)),
               Builder(builder: (BuildContext context) {
                 return ElevatedButton(
