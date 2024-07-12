@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/View/busca.dart';
 import 'package:recipes/View/cadastro.dart';
+import 'package:recipes/View/viewResources/forms/cadastro_user.dart';
 
-import 'package:recipes/View/viewResources/barra_superior.dart';
-import 'package:recipes/View/viewResources/menu.dart';
+import 'package:recipes/View/viewResources/layout/barra_superior.dart';
+import 'package:recipes/View/viewResources/layout/menu.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -68,7 +69,7 @@ class HomeState extends State<Home> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Cadastro()))
+                                    builder: (context) => const Cadastro2()))
                           },
                       child: const SizedBox(
                         width: 200,

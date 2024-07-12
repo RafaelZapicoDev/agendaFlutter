@@ -1,39 +1,28 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:radio_group_v2/radio_group_v2.dart';
-import 'package:recipes/Model/contato.dart';
-import 'package:recipes/Model/contato_service.dart';
 import 'package:recipes/View/busca.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
-import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-class Cadastro extends StatefulWidget {
-  const Cadastro({super.key});
+class Cadastro2 extends StatefulWidget {
+  const Cadastro2({super.key});
 
   @override
   State<StatefulWidget> createState() => CadastroState();
 }
 
-class CadastroState extends State<Cadastro> {
+class CadastroState extends State<Cadastro2> {
   final nome = TextEditingController();
   final email = TextEditingController();
   final numero = TextEditingController();
-  bool termos = false;
-  DateTime? nascimento;
-  DateTime maioridade = DateTime(
-      DateTime.now().year - 18, DateTime.now().month, DateTime.now().day);
-  final telefone = TextEditingController();
-  String pais = '';
-  List<String> paises = ["Brasil", "Colombia", "Mexico"];
-  RadioGroupController genero = RadioGroupController();
+  List<String> paises = ["Brasil", "Colombia", "Mexico"]; //substituir
+  late String pais = '';
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: Barrasuperior(nome: "Cadastro"),
       drawer: const MenuDrawer(),
@@ -45,8 +34,10 @@ class CadastroState extends State<Cadastro> {
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           alignment: Alignment.center,
           child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            key: formKey,
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              runSpacing: 20,
               children: [
                 CustomTextFormField(
                   controller: nome,
@@ -54,22 +45,20 @@ class CadastroState extends State<Cadastro> {
                   type: TextFormType.text,
                   labelText: "Nome Completo",
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CustomTextFormField(
                   controller: email,
                   validatorMessage: "Insira um email válido",
                   type: TextFormType.email,
                   labelText: "Email",
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CustomTextFormField(
                   controller: numero,
                   validatorMessage: "Insira um numero válido",
                   type: TextFormType.numero,
                   labelText: "Telefone / Celular",
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
                 DropdownButtonFormField<String>(
+                  dropdownColor: Colors.white,
                   decoration: const InputDecoration(
                     labelText: "País de Origem",
                     focusedBorder: OutlineInputBorder(
@@ -98,64 +87,28 @@ class CadastroState extends State<Cadastro> {
                   items: paises.map<DropdownMenuItem<String>>((String pais) {
                     return DropdownMenuItem<String>(
                       value: pais,
-                      child: Text(pais),
+                      child: Text(
+                        pais,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
-                RadioGroup(
-                  indexOfDefault: 2,
-                  controller: genero,
-                  values: const [
-                    "Feminino",
-                    "Masculino",
-                    "Prefiro não responder"
-                  ],
-                  orientation: RadioGroupOrientation.horizontal,
-                  decoration: const RadioGroupDecoration(
-                    spacing: 10.0,
-                    labelStyle: TextStyle(
-                      color: Colors.blueAccent,
-                    ),
-                    activeColor: Colors.amber,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
-                // CalendarDatePicker(
-                //   lastDate: maioridade,
-                //   initialDate: DateTime(1900, 1, 1),
-                //   firstDate: DateTime(1900, 1, 1),
-                // ),
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
-                CheckboxFormField(
-                  title: const Text(
-                    "Li e concordo com os termos de uso",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                  onSaved: (value) => {
-                    setState(() {
-                      termos = value ?? false;
-                    })
-                  },
-                  validator: (termos) {
-                    if (termos == false) {
-                      return "É preciso concordar para validar seu cadastro!";
-                    }
-                    return null;
-                  },
-                ),
-
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber),
                       onPressed: () => {
                             // cadastrarContato(),
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Busca())),
+                            if (formKey.currentState!.validate())
+                              {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Busca())),
+                              }
                           },
                       child: const SizedBox(
                         width: 200,
@@ -183,19 +136,4 @@ class CadastroState extends State<Cadastro> {
       ),
     );
   }
-
-//   void cadastrarContato() {
-//     ContatoService service = ContatoService();
-//     Contato contato = Contato(
-//         id: service.listarContato().length + 1,
-//         nome: nome.text,
-//         email: email.text,
-//         telefone: telefone.text,
-//         pais: pais,
-//         genero: genero.toString(),
-//         termos: termos,
-//         nascimento: null);
-//     service.cadastrar(contato);
-//   }
-// }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipes/View/viewResources/estilo.dart';
+import 'package:recipes/View/viewResources/theme/estilo.dart';
 
 class ThemeNotifier with ChangeNotifier {
   bool _isDark = false;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/View/home.dart';
 
-import 'package:recipes/View/viewResources/n_tema.dart';
+import 'package:recipes/View/viewResources/theme/n_tema.dart';
 
 void main() {
   runApp(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
 import 'package:recipes/View/busca.dart';
-import 'package:recipes/View/viewResources/barra_superior.dart';
-import 'package:recipes/View/viewResources/menu.dart';
+import 'package:recipes/View/viewResources/layout/barra_superior.dart';
+import 'package:recipes/View/viewResources/layout/menu.dart';
 
 class Perfil extends StatelessWidget {
   Perfil({super.key, required this.id});
