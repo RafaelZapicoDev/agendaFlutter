@@ -14,6 +14,10 @@ class CheckboxFormField extends FormField<bool> {
   }) : super(
           builder: (FormFieldState<bool> state) {
             return CheckboxListTile(
+              fillColor: WidgetStateColor.resolveWith((states) {
+                return Color.fromARGB(255, 220, 238, 247);
+              }),
+              activeColor: Colors.blueAccent,
               dense: state.hasError,
               title: title,
               value: state.value,
@@ -22,15 +26,17 @@ class CheckboxFormField extends FormField<bool> {
                   ? Builder(
                       builder: (BuildContext context) => Text(
                         state.errorText ?? "",
-                        style: const TextStyle(color: Colors.redAccent),
+                        style: const TextStyle(color: Colors.red),
                       ),
                     )
                   : null,
               controlAffinity: ListTileControlAffinity.leading,
-              activeColor: activeColor,
               checkColor: checkColor,
               shape: RoundedRectangleBorder(
-                side: const BorderSide(color: Colors.black),
+                side: const BorderSide(
+                    color: Color.fromARGB(255, 98, 160, 190),
+                    width: 2,
+                    style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular(4),
               ),
             );
