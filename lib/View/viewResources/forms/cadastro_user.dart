@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:recipes/View/busca.dart';
+import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
@@ -15,9 +17,12 @@ class Cadastro2 extends StatefulWidget {
 class CadastroState extends State<Cadastro2> {
   final nome = TextEditingController();
   final email = TextEditingController();
+  final data = TextEditingController();
   final numero = TextEditingController();
-  List<String> paises = ["Brasil", "Colombia", "Mexico"]; //substituir
+  final RadioGroupController genero = RadioGroupController();
+  final List<String> paises = ["Brasil", "Colombia", "Mexico"]; //substituir
   late String pais = '';
+  late bool termos = false;
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +101,43 @@ class CadastroState extends State<Cadastro2> {
                     );
                   }).toList(),
                 ),
+                RadioGroup(
+                  indexOfDefault: 2,
+                  controller: genero,
+                  values: const [
+                    "Feminino",
+                    "Masculino",
+                    "Prefiro não responder"
+                  ],
+                  orientation: RadioGroupOrientation.horizontal,
+                  decoration: RadioGroupDecoration(
+                    fillColor: WidgetStateColor.resolveWith((states) {
+                      return Colors.amber;
+                    }),
+                    spacing: 10.0,
+                    labelStyle: const TextStyle(
+                      color: Colors.blueAccent,
+                    ),
+                    activeColor: Colors.amber,
+                  ),
+                ),
+                CheckboxFormField(
+                  title: const Text(
+                    "Li e concordo com os termos de uso",
+                    style: TextStyle(color: Colors.blueAccent),
+                  ),
+                  onSaved: (value) => {
+                    setState(() {
+                      termos = value ?? false;
+                    })
+                  },
+                  validator: (termos) {
+                    if (termos == false) {
+                      return "É preciso concordar para validar seu cadastro!";
+                    }
+                    return null;
+                  },
+                ),
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -135,5 +177,18 @@ class CadastroState extends State<Cadastro2> {
         ),
       ),
     );
+  }
+
+  Future<void> selectDate() async {
+    DateTime? selecionado = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1950),
+        lastDate: DateTime.now());
+    if (selecionado != null) {
+      setState(() {
+        data.text = selecionado.toString().split("")[0];
+      });
+    }
   }
 }

@@ -1,11 +1,11 @@
 class Contato {
   int id;
   String nome;
-  String telefone;
+  String numero;
   String email;
   String pais;
   String genero;
-  DateTime nascimento;
+  String data;
   bool termos;
 
   Contato(
@@ -15,6 +15,6 @@ class Contato {
       required this.email,
       required this.pais,
       required this.genero,
-      required this.nascimento,
-      required this.telefone});
+      required this.data,
+      required this.numero});
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
-import 'package:recipes/View/cadastro.dart';
+
 import 'package:recipes/View/perfil.dart';
+import 'package:recipes/View/viewResources/forms/cadastro_user.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
@@ -24,7 +25,7 @@ class BuscaState extends State<Busca> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Cadastro()));
+                MaterialPageRoute(builder: (context) => const Cadastro2()));
           },
           child: const Icon(
             Icons.add,
@@ -55,10 +56,7 @@ class BuscaState extends State<Busca> {
                         const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20)),
                         Column(
-                          children: [
-                            Text(contato.email),
-                            Text(contato.telefone)
-                          ],
+                          children: [Text(contato.email), Text(contato.numero)],
                         )
                       ],
                     ),

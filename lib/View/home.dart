@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/View/busca.dart';
-import 'package:recipes/View/cadastro.dart';
+
 import 'package:recipes/View/viewResources/forms/cadastro_user.dart';
 
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';

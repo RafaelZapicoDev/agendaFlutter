@@ -22,14 +22,17 @@ class CheckboxFormField extends FormField<bool> {
                   ? Builder(
                       builder: (BuildContext context) => Text(
                         state.errorText ?? "",
-                        style: const TextStyle(color: Colors.blueAccent),
+                        style: const TextStyle(color: Colors.redAccent),
                       ),
                     )
                   : null,
               controlAffinity: ListTileControlAffinity.leading,
               activeColor: activeColor,
               checkColor: checkColor,
-              shape: shape,
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.circular(4),
+              ),
             );
           },
         );

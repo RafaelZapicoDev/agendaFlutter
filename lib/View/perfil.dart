@@ -75,7 +75,7 @@ class Perfil extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Telefone: ${contato.telefone}",
+                  "Telefone: ${contato.numero}",
                   style: const TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(204, 68, 137, 255),

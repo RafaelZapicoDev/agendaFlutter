@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 final ThemeData temaClaro = ThemeData(
-    primaryColor: Colors.blueAccent,
     scaffoldBackgroundColor: Colors.blueGrey[50],
     drawerTheme: const DrawerThemeData(
         backgroundColor: Color.fromARGB(95, 97, 148, 207)),
