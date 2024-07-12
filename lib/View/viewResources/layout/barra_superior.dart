@@ -3,27 +3,31 @@ import 'package:provider/provider.dart';
 import 'package:recipes/View/viewResources/theme/n_tema.dart';
 
 class Barrasuperior extends AppBar {
-  final bool tema = false;
+  final String nome;
 
-  Barrasuperior({super.key, required nome})
+  Barrasuperior({super.key, required this.nome})
       : super(
-            title: Text("$nome"),
-            centerTitle: true,
-            leading: Builder(builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+          title: Text(nome),
+          centerTitle: true,
+          leading: Builder(builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          }),
+          actions: [
+            Builder(builder: (BuildContext context) {
+              return Consumer<ThemeNotifier>(
+                builder: (context, themeNotifier, _) => IconButton(
+                  icon: themeNotifier.isDark
+                      ? const Icon(Icons.dark_mode)
+                      : const Icon(Icons.dark_mode_outlined),
+                  onPressed: () {
+                    themeNotifier.toggleTheme();
+                  },
+                ),
               );
             }),
-            actions: [
-              Builder(builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(Icons.dark_mode_outlined),
-                  onPressed: () {
-                    Provider.of<ThemeNotifier>(context, listen: false)
-                        .toggleTheme();
-                  },
-                );
-              }),
-            ]);
+          ],
+        );
 }

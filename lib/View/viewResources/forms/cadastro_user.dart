@@ -112,7 +112,7 @@ class CadastroState extends State<Cadastro2> {
                   orientation: RadioGroupOrientation.horizontal,
                   decoration: RadioGroupDecoration(
                     fillColor: WidgetStateColor.resolveWith((states) {
-                      return Colors.amber;
+                      return const Color.fromARGB(255, 98, 160, 190);
                     }),
                     spacing: 10.0,
                     labelStyle: const TextStyle(
