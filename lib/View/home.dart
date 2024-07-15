@@ -25,6 +25,55 @@ class HomeState extends State<Home> {
           child: Column(
         children: [
           Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(top: 20, left: 20, bottom: 20),
+            margin: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Text(
+                      "Última interação",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 214, 178, 48),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+                const Padding(padding: EdgeInsets.only(top: 40)),
+                Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 30, left: 20, right: 20),
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 90,
+                          ),
+                          Text(
+                            "data",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          Padding(padding: EdgeInsets.only(right: 240))
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Container(
             padding: const EdgeInsets.all(23),
             alignment: Alignment.center,
             child: Column(

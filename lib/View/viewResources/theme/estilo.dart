@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData temaClaro = ThemeData(
-    scaffoldBackgroundColor: Colors.blueGrey[50],
+    scaffoldBackgroundColor: const Color.fromARGB(255, 212, 222, 228),
     drawerTheme: const DrawerThemeData(
         backgroundColor: Color.fromARGB(95, 97, 148, 207)),
     colorScheme: const ColorScheme.dark(),
@@ -9,6 +9,7 @@ final ThemeData temaClaro = ThemeData(
         backgroundColor: Color.fromARGB(255, 106, 153, 233),
         foregroundColor: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
         backgroundColor: Color.fromARGB(255, 255, 179, 0)));
 
 final ThemeData temaEscuro = ThemeData(
@@ -21,5 +22,6 @@ final ThemeData temaEscuro = ThemeData(
       backgroundColor: Color.fromARGB(255, 6, 26, 61),
       foregroundColor: Colors.white),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      foregroundColor: Colors.white,
       backgroundColor: Color.fromARGB(255, 255, 179, 0)),
 );

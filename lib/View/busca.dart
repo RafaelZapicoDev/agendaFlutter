@@ -20,7 +20,7 @@ class BuscaState extends State<Busca> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Barrasuperior(
-          nome: "Pesquisa Contatos",
+          nome: "Meus Contatos",
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

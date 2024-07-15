@@ -23,4 +23,8 @@ class ContatoService {
   void editar(Contato contato) {
     contatos[contato.id - 1] = contato;
   }
+
+  void deletar(Contato contato) {
+    contatos.remove(contato);
+  }
 }

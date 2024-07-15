@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
+import 'package:recipes/View/busca.dart';
 
 import 'package:recipes/View/viewResources/forms/editar_user.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
@@ -117,73 +119,32 @@ class Perfil extends StatelessWidget {
               ],
             ),
             const Padding(padding: EdgeInsets.only(bottom: 45)),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 50,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.amber,
-                    child: Icon(
-                      Icons.call,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.amber,
-                    child: Icon(
-                      Icons.message,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.amber,
-                    child: Icon(
-                      Icons.video_call,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.amber,
-                    child: Icon(
-                      Icons.alternate_email,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Editar(
-                        id: contato.id - 1,
-                      )));
-        },
-        backgroundColor: Colors.amber[600],
-        child: const Icon(
-          Icons.edit,
-          color: Colors.white,
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton:
+          ExpandableFab(distance: 60, type: ExpandableFabType.up, children: [
+        FloatingActionButton.small(
+          child: const Icon(Icons.settings),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Editar(
+                          id: contato.id - 1,
+                        )));
+          },
         ),
-      ),
+        FloatingActionButton.small(
+          child: const Icon(Icons.delete_outline),
+          onPressed: () => {
+            service.deletar(contato),
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Busca())),
+          },
+        )
+      ]),
     );
   }
 }
