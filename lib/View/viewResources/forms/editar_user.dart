@@ -3,34 +3,45 @@ import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
 import 'package:recipes/View/busca.dart';
-import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-class Cadastro2 extends StatefulWidget {
-  const Cadastro2({super.key});
+class Editar extends StatefulWidget {
+  const Editar({super.key, required this.id});
+
+  final int id;
 
   @override
-  State<StatefulWidget> createState() => CadastroState();
+  State<StatefulWidget> createState() => EditarState();
 }
 
-class CadastroState extends State<Cadastro2> {
+class EditarState extends State<Editar> {
+  final ContatoService service = ContatoService();
+
   final nome = TextEditingController();
   final email = TextEditingController();
   final numero = TextEditingController();
   final RadioGroupController genero = RadioGroupController();
   final List<String> paises = ["Brasil", "Colombia", "Mexico"]; //substituir
-  late String pais = '';
+  late String pais;
   late bool termos = false;
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+    Contato contato = service.listarContato().elementAt(widget.id);
+
+    nome.text = contato.nome;
+    email.text = contato.email;
+    numero.text = contato.numero;
+    pais = contato.pais;
+    genero.selectAt(paises.indexOf(contato.genero));
+
     return Scaffold(
-      appBar: Barrasuperior(nome: "Cadastro"),
+      appBar: Barrasuperior(nome: "Editar Contato"),
       drawer: const MenuDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -122,23 +133,6 @@ class CadastroState extends State<Cadastro2> {
                     activeColor: Colors.amber,
                   ),
                 ),
-                CheckboxFormField(
-                  title: const Text(
-                    "Li e concordo com os termos de uso",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                  onSaved: (value) => {
-                    setState(() {
-                      termos = value ?? false;
-                    })
-                  },
-                  validator: (termos) {
-                    if (termos == false) {
-                      return "É preciso concordar para validar seu cadastro!";
-                    }
-                    return null;
-                  },
-                ),
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -147,7 +141,7 @@ class CadastroState extends State<Cadastro2> {
                             // cadastrarContato(),
                             if (formKey.currentState!.validate())
                               {
-                                cadastrar(),
+                                editarContato(),
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -160,12 +154,12 @@ class CadastroState extends State<Cadastro2> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Icon(
-                              Icons.person_add,
+                              Icons.save,
                               color: Colors.white,
                               size: 25,
                             ),
                             Text(
-                              "Cadastrar",
+                              "Salvar",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             )
@@ -181,11 +175,11 @@ class CadastroState extends State<Cadastro2> {
     );
   }
 
-  void cadastrar() {
+  void editarContato() {
     ContatoService service = ContatoService();
 
     Contato contato = Contato(
-        id: service.listarContato().length + 1,
+        id: widget.id + 1,
         termos: termos,
         nome: nome.text,
         email: email.text,
@@ -193,6 +187,6 @@ class CadastroState extends State<Cadastro2> {
         genero: genero.value,
         numero: numero.text);
 
-    service.cadastrar(contato);
+    service.editar(contato);
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
-import 'package:recipes/View/busca.dart';
+
+import 'package:recipes/View/viewResources/forms/editar_user.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
@@ -85,6 +86,36 @@ class Perfil extends StatelessWidget {
                 ),
               ],
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 15)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Genero: ${contato.genero}",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(204, 68, 137, 255),
+                    letterSpacing: 1,
+                    wordSpacing: 8,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(padding: EdgeInsets.only(bottom: 15)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "País: ${contato.pais}",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(204, 68, 137, 255),
+                    letterSpacing: 1,
+                    wordSpacing: 8,
+                  ),
+                ),
+              ],
+            ),
             const Padding(padding: EdgeInsets.only(bottom: 45)),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -141,7 +172,11 @@ class Perfil extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const Busca()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Editar(
+                        id: contato.id - 1,
+                      )));
         },
         backgroundColor: Colors.amber[600],
         child: const Icon(

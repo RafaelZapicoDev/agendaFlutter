@@ -15,7 +15,7 @@ class CheckboxFormField extends FormField<bool> {
           builder: (FormFieldState<bool> state) {
             return CheckboxListTile(
               fillColor: WidgetStateColor.resolveWith((states) {
-                return Color.fromARGB(255, 220, 238, 247);
+                return const Color.fromARGB(255, 220, 238, 247);
               }),
               activeColor: Colors.blueAccent,
               dense: state.hasError,
