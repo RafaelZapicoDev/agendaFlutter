@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipes/View/busca.dart';
+import 'package:recipes/View/viewResources/pages/busca.dart';
 
 import 'package:recipes/View/viewResources/forms/cadastro_user.dart';
 

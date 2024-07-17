@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
-import 'package:recipes/View/busca.dart';
+import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';

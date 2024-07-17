@@ -11,20 +11,23 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final TextFormType type;
+  bool? obscure;
   final String validatorMessage;
 
-  const CustomTextFormField(
+  CustomTextFormField(
       {super.key,
       required this.controller,
       required this.labelText,
       required this.type,
-      required this.validatorMessage});
+      required this.validatorMessage,
+      this.obscure});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: const TextStyle(color: Colors.black),
       controller: controller,
+      obscureText: obscure ?? false,
       cursorColor: Colors.blueAccent,
       decoration: InputDecoration(
           labelText: labelText,
