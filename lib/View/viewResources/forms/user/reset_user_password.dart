@@ -89,7 +89,16 @@ class ResetPasswordState extends State<ResetPassword> {
                       fit: BoxFit.contain,
                     ),
                   ),
-
+                  const Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Insira seu email cadastrado, enviaremos um link para redefinição de senha!",
+                        style:
+                            TextStyle(color: Colors.blueAccent, fontSize: 20),
+                      )
+                    ],
+                  ),
                   CustomTextFormField(
                     controller: email,
                     validatorMessage: "Insira um nome email válido!",
