@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
+import 'package:recipes/View/viewResources/forms/user/cadastro_user.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({super.key});
@@ -123,7 +124,11 @@ class LoginUserState extends State<LoginUser> {
                                       BorderRadius.all(Radius.circular(8))),
                               backgroundColor: Colors.blueAccent[200]),
                           onPressed: () => {
-                                if (formKey.currentState!.validate()) {signIn()}
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CadastroUser()))
                               },
                           child: const SizedBox(
                             width: 125,

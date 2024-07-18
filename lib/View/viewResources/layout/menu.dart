@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/pages/home.dart';
 import 'package:recipes/View/viewResources/pages/perfil.dart';
-import 'package:recipes/View/viewResources/forms/login_user.dart';
 
 class MenuDrawer extends StatefulWidget {
   const MenuDrawer({super.key});

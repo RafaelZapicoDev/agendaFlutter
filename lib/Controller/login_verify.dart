@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:recipes/View/viewResources/forms/login_user.dart';
+import 'package:recipes/View/viewResources/forms/user/login_user.dart';
 import 'package:recipes/View/viewResources/pages/home.dart';
 
 class LoginVerify extends StatelessWidget {
