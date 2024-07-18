@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipes/Controller/login_verify.dart';
-import 'package:recipes/View/viewResources/pages/busca.dart';
-import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
-import 'package:recipes/View/viewResources/layout/barra_superior.dart';
-import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
-import 'package:recipes/View/viewResources/layout/menu.dart';
+import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
+
+import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 class CadastroUser extends StatefulWidget {
   const CadastroUser({super.key});

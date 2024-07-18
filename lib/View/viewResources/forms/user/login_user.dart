@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 import 'package:recipes/View/viewResources/forms/user/cadastro_user.dart';
+import 'package:recipes/View/viewResources/forms/user/reset_user_password.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({super.key});
@@ -78,7 +79,13 @@ class LoginUserState extends State<LoginUser> {
                       ),
                       const Padding(padding: EdgeInsets.only(left: 200)),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ResetPassword()));
+                          },
                           child: Text(
                             "Recupere-a",
                             style: TextStyle(

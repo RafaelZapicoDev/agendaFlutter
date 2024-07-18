@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/pages/home.dart';
 import 'package:recipes/View/viewResources/pages/perfil.dart';
@@ -81,6 +82,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
             trailing: const Icon(Icons.arrow_right),
             onTap: () {
               FirebaseAuth.instance.signOut();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LoginVerify()));
             },
           ),
         ],
