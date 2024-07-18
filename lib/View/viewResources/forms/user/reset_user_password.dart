@@ -22,21 +22,29 @@ class ResetPasswordState extends State<ResetPassword> {
   }
 
   void mensagemErro(FirebaseAuthException? e) {
-    Widget? mensagem;
+    Widget mensagem;
     if (e != null) {
       mensagem =
           const Text("Um lik de reset foi enviado para o email cadastrado!");
     } else {
-      mensagem = Text(e!.message!.trim());
+      mensagem = const Text(
+          "Algo deu errado, confira se digitou corretamente o email cadastrado!");
     }
 
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: mensagem,
+            content: Wrap(
+              alignment: WrapAlignment.center,
+              children: [mensagem],
+            ),
+            actionsAlignment: MainAxisAlignment.end,
             actions: [
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.amber),
                   onPressed: () => Navigator.pop(context),
                   child: const Text("OK"))
             ],

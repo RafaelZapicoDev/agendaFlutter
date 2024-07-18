@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 final ThemeData temaClaro = ThemeData(
+    dialogTheme: const DialogTheme(
+        alignment: Alignment.center,
+        backgroundColor: Colors.white,
+        contentTextStyle: TextStyle(color: Colors.blueAccent, fontSize: 20)),
     scaffoldBackgroundColor: const Color.fromARGB(255, 212, 222, 228),
     drawerTheme: const DrawerThemeData(
         backgroundColor: Color.fromARGB(95, 97, 148, 207)),
