@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:recipes/View/viewResources/pages/home.dart';
+
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 class LoginUser extends StatefulWidget {
@@ -51,7 +51,7 @@ class LoginUserState extends State<LoginUser> {
                     height: 400,
                     child: Image.asset(
                       'img/LOGO.png',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
 
@@ -86,41 +86,65 @@ class LoginUserState extends State<LoginUser> {
                           ))
                     ],
                   ),
-                  Builder(builder: (BuildContext context) {
-                    return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.amber),
-                        onPressed: () => {
-                              // cadastrarContato(),
-                              if (formKey.currentState!.validate())
-                                {
-                                  signIn()
-                                  // cadastrar(),
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => const Home())),
-                                }
-                            },
-                        child: const SizedBox(
-                          width: 200,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.login_rounded,
-                                color: Colors.white,
-                                size: 35,
-                              ),
-                              Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              )
-                            ],
-                          ),
-                        ));
-                  }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8))),
+                              backgroundColor: Colors.amber),
+                          onPressed: () => {
+                                if (formKey.currentState!.validate()) {signIn()}
+                              },
+                          child: const SizedBox(
+                            width: 125,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.login_rounded,
+                                  color: Colors.white,
+                                  size: 35,
+                                ),
+                                Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )
+                              ],
+                            ),
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8))),
+                              backgroundColor: Colors.blueAccent[200]),
+                          onPressed: () => {
+                                if (formKey.currentState!.validate()) {signIn()}
+                              },
+                          child: const SizedBox(
+                            width: 125,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.arrow_circle_up,
+                                  color: Colors.white,
+                                  size: 35,
+                                ),
+                                Text(
+                                  "Cadastro",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )
+                              ],
+                            ),
+                          )),
+                    ],
+                  )
                   // CheckboxFormField(
                   //   title: const Text(
                   //     "Manter-me conectado",

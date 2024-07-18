@@ -11,10 +11,10 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final TextFormType type;
-  bool? obscure;
+  final bool? obscure;
   final String validatorMessage;
 
-  CustomTextFormField(
+  const CustomTextFormField(
       {super.key,
       required this.controller,
       required this.labelText,

@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/Controller/login_verify.dart';
-import 'package:recipes/View/viewResources/forms/login_user.dart';
-import 'package:recipes/View/viewResources/pages/home.dart';
 
 import 'package:recipes/View/viewResources/theme/n_tema.dart';
 import 'package:recipes/View/viewResources/firebase_options.dart';

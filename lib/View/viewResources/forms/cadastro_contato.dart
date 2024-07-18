@@ -9,14 +9,14 @@ import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-class Cadastro2 extends StatefulWidget {
-  const Cadastro2({super.key});
+class CadastroContato extends StatefulWidget {
+  const CadastroContato({super.key});
 
   @override
-  State<StatefulWidget> createState() => CadastroState();
+  State<StatefulWidget> createState() => CadastroContatoState();
 }
 
-class CadastroState extends State<Cadastro2> {
+class CadastroContatoState extends State<CadastroContato> {
   final nome = TextEditingController();
   final email = TextEditingController();
   final numero = TextEditingController();
