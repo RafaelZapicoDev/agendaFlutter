@@ -12,6 +12,9 @@ class CustomTextFormField extends StatelessWidget {
   final String labelText;
   final TextFormType type;
   final bool? obscure;
+  final Function()? onTapius;
+  final bool? readOnly;
+
   final String validatorMessage;
 
   const CustomTextFormField(
@@ -20,12 +23,16 @@ class CustomTextFormField extends StatelessWidget {
       required this.labelText,
       required this.type,
       required this.validatorMessage,
-      this.obscure});
+      this.obscure,
+      this.onTapius,
+      this.readOnly});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: const TextStyle(color: Colors.black),
+      onTap: onTapius,
+      readOnly: readOnly ?? false,
       controller: controller,
       obscureText: obscure ?? false,
       cursorColor: Colors.blueAccent,

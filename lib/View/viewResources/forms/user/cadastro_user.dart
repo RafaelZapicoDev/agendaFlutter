@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipes/Controller/login_verify.dart';
-
 import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
-
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
 class CadastroUser extends StatefulWidget {
@@ -16,6 +15,15 @@ class CadastroUser extends StatefulWidget {
 
 class CadastroUserState extends State<CadastroUser> {
   final email = TextEditingController();
+  final nome = TextEditingController();
+  final dataNascimento = TextEditingController();
+  final telefone = TextEditingController();
+  final List<String> generos = [
+    "Feminino",
+    "Masculino",
+    "Prefiro não responder"
+  ];
+  String? generoSelecionado;
   final senha = TextEditingController();
   final senhaConfirm = TextEditingController();
   late bool termos = false;
@@ -23,7 +31,9 @@ class CadastroUserState extends State<CadastroUser> {
   @override
   void dispose() {
     email.dispose();
+    nome.dispose();
     senha.dispose();
+    telefone.dispose();
     super.dispose();
   }
 
@@ -36,7 +46,22 @@ class CadastroUserState extends State<CadastroUser> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+    Future<void> datePicker() async {
+      DateTime? data = await showDatePicker(
+        context: context,
+        firstDate: DateTime(1900),
+        initialDate: DateTime.now(),
+        lastDate: DateTime(2100),
+      );
+      if (data != null) {
+        setState(() {
+          dataNascimento.text = "${data.day}/${data.month}/${data.year}";
+        });
+      }
+    }
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -50,14 +75,6 @@ class CadastroUserState extends State<CadastroUser> {
               alignment: WrapAlignment.center,
               runSpacing: 20,
               children: [
-                SizedBox(
-                  width: 400,
-                  height: 300,
-                  child: Image.asset(
-                    'img/LOGO.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -91,6 +108,28 @@ class CadastroUserState extends State<CadastroUser> {
                   labelText: "Email",
                 ),
                 CustomTextFormField(
+                  controller: nome,
+                  validatorMessage: "Insira um nome válido",
+                  type: TextFormType.text,
+                  labelText: "Nome Completo",
+                ),
+                CustomTextFormField(
+                  controller: dataNascimento,
+                  validatorMessage: "Insira uma data válida",
+                  onTapius: () {
+                    datePicker();
+                  },
+                  type: TextFormType.text,
+                  labelText: "Aniversário",
+                  readOnly: true,
+                ),
+                CustomTextFormField(
+                  controller: telefone,
+                  validatorMessage: "Insira um número válido",
+                  type: TextFormType.numero,
+                  labelText: "Telefone para contato",
+                ),
+                CustomTextFormField(
                   controller: senha,
                   validatorMessage: "Insira uma senha válida",
                   type: TextFormType.text,
@@ -103,6 +142,45 @@ class CadastroUserState extends State<CadastroUser> {
                   type: TextFormType.text,
                   labelText: "Confirmar senha",
                   obscure: true,
+                ),
+                DropdownButtonFormField<String>(
+                  dropdownColor: Colors.white,
+                  decoration: const InputDecoration(
+                    labelText: "Gênero",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.amber),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 98, 160, 190),
+                      ),
+                    ),
+                    labelStyle: TextStyle(color: Colors.blueAccent),
+                  ),
+                  value: generoSelecionado,
+                  validator: (genero) {
+                    if (genero == null || genero.isEmpty) {
+                      return "Responda o campo acima!";
+                    }
+                    return null;
+                  },
+                  hint: const Text("Selecione seu Gênero"),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      generoSelecionado = newValue;
+                    });
+                  },
+                  items: generos.map<DropdownMenuItem<String>>((String genero) {
+                    return DropdownMenuItem<String>(
+                      value: genero,
+                      child: Text(
+                        genero,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
                 CheckboxFormField(
                   title: const Text(
@@ -126,7 +204,6 @@ class CadastroUserState extends State<CadastroUser> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber),
                       onPressed: () => {
-                            // cadastrarContato(),
                             if (formKey.currentState!.validate())
                               {
                                 signUp(),

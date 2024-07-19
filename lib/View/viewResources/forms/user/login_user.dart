@@ -33,6 +33,7 @@ class LoginUserState extends State<LoginUser> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         //adiciona uma area pra aparecer a barra do sistema
         child: SingleChildScrollView(

@@ -84,7 +84,6 @@ class CadastroContatoState extends State<CadastroContato> {
                     }
                     return null;
                   },
-                  hint: const Text("Selecione seu país"),
                   onChanged: (pais2) {
                     setState(() {
                       pais = pais2!;
