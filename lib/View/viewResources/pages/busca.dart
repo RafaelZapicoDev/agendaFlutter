@@ -3,7 +3,7 @@ import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
 
 import 'package:recipes/View/viewResources/pages/perfil.dart';
-import 'package:recipes/View/viewResources/forms/cadastro_contato.dart';
+import 'package:recipes/View/viewResources/forms/contato/cadastro_contato.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 

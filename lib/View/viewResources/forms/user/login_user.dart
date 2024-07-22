@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:recipes/Services/google_login.dart';
 
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 import 'package:recipes/View/viewResources/forms/user/cadastro_user.dart';
@@ -50,8 +52,8 @@ class LoginUserState extends State<LoginUser> {
                 runSpacing: 20,
                 children: [
                   SizedBox(
-                    width: 4300,
-                    height: 400,
+                    width: 500,
+                    height: 300,
                     child: Image.asset(
                       'img/LOGO.png',
                       fit: BoxFit.contain,
@@ -157,7 +159,42 @@ class LoginUserState extends State<LoginUser> {
                             ),
                           )),
                     ],
-                  )
+                  ),
+                  const SizedBox(
+                      height: 40,
+                      width: 500,
+                      child: Divider(
+                        color: Color.fromARGB(255, 202, 204, 206),
+                      )),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shadowColor: Colors.transparent,
+                          elevation: 0,
+                          backgroundColor: Colors.white),
+                      onPressed: AuthService().signInWithGoogle(),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.google,
+                              color: Colors.redAccent,
+                              size: 32,
+                            ),
+                            onPressed: null,
+                          ),
+                          Padding(padding: EdgeInsets.only(left: 5)),
+                          Text(
+                            "Continue com Google",
+                            style: TextStyle(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                          Padding(padding: EdgeInsets.only(left: 30)),
+                        ],
+                      ))
+
                   // CheckboxFormField(
                   //   title: const Text(
                   //     "Manter-me conectado",
