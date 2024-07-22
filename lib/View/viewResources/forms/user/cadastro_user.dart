@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipes/Controller/login_verify.dart';
@@ -23,7 +24,7 @@ class CadastroUserState extends State<CadastroUser> {
     "Masculino",
     "Prefiro não responder"
   ];
-  String? generoSelecionado;
+  String generoSelecionado = "Prefiro não responder";
   final senha = TextEditingController();
   final senhaConfirm = TextEditingController();
   late bool termos = false;
@@ -38,8 +39,24 @@ class CadastroUserState extends State<CadastroUser> {
   }
 
   Future signUp() async {
+    //CRIANDO E LOGANDO O USUARIO
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email.text.trim(), password: senha.text.trim());
+    //ADICIONANDO INFORMAÇÕES AO USUARIO
+    addUserDetails(nome.text, email.text, dataNascimento.text,
+        generoSelecionado, telefone.text, termos);
+  }
+
+  Future addUserDetails(String nome, String email, String dataNascimento,
+      String genero, String telefone, bool termos) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'nome': nome,
+      'email': email,
+      'dataNascimento': dataNascimento,
+      'genero': genero,
+      'telefone': telefone,
+      'termos': termos,
+    });
   }
 
   @override
@@ -167,7 +184,7 @@ class CadastroUserState extends State<CadastroUser> {
                   hint: const Text("Selecione seu Gênero"),
                   onChanged: (String? newValue) {
                     setState(() {
-                      generoSelecionado = newValue;
+                      generoSelecionado = newValue!;
                     });
                   },
                   items: generos.map<DropdownMenuItem<String>>((String genero) {
