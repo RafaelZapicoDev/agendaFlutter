@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 
 class AuthService {
+  var logger = Logger();
+
+  //INICIALIZA O SERVIÇO DE LOGIN DO GOOGLE
   final GoogleSignIn _googleSignIn = GoogleSignIn(
       clientId:
           "34198666131-9a0mbn3mu818n0mb025c9tjpc66pilf9.apps.googleusercontent.com");
@@ -25,10 +29,10 @@ class AuthService {
           await FirebaseAuth.instance.signInWithCredential(credential);
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      print('Erro ao autenticar com o Google: ${e.message}');
+      logger.e('Erro ao autenticar com o Google: ${e.message}');
       return null;
     } catch (e) {
-      print('Erro inesperado: $e');
+      logger.e('Erro inesperado: $e');
       return null;
     }
   }
@@ -39,7 +43,7 @@ class AuthService {
       await _googleSignIn.signOut();
       return true;
     } on Exception catch (e) {
-      print('Erro ao deslogar: $e');
+      logger.e('Erro ao deslogar: $e');
       return false;
     }
   }
