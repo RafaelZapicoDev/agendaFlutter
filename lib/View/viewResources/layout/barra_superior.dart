@@ -18,6 +18,7 @@ class Barrasuperior extends AppBar {
           actions: [
             Builder(builder: (BuildContext context) {
               return Consumer<ThemeNotifier>(
+                //lofica pra mudar o tema e icone do botão de trocar tema
                 builder: (context, themeNotifier, _) => IconButton(
                   icon: themeNotifier.isDark
                       ? const Icon(Icons.dark_mode)

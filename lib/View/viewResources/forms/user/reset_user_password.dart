@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
+// formulario para reset de senha usando email
+
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
 
@@ -25,7 +27,7 @@ class ResetPasswordState extends State<ResetPassword> {
     Widget mensagem;
     if (e != null) {
       mensagem =
-          const Text("Um lik de reset foi enviado para o email cadastrado!");
+          const Text("Um link de reset foi enviado para o email cadastrado!");
     } else {
       mensagem = const Text(
           "Algo deu errado, confira se digitou corretamente o email cadastrado!");
@@ -52,6 +54,7 @@ class ResetPasswordState extends State<ResetPassword> {
         });
   }
 
+//metodo para enviar email de reset de senha
   Future resetPassword(BuildContext context) async {
     try {
       await FirebaseAuth.instance
@@ -114,7 +117,6 @@ class ResetPasswordState extends State<ResetPassword> {
                                 borderRadius: BorderRadius.circular(8)),
                             backgroundColor: Colors.blueAccent),
                         onPressed: () => {
-                              // cadastrarContato(),
                               if (formKey.currentState!.validate())
                                 {resetPassword(context)}
                             },
@@ -138,18 +140,6 @@ class ResetPasswordState extends State<ResetPassword> {
                           ),
                         ));
                   }),
-
-                  // CheckboxFormField(
-                  //   title: const Text(
-                  //     "Manter-me conectado",
-                  //     style: TextStyle(color: Colors.blueAccent),
-                  //   ),
-                  //   onSaved: (value) => {
-                  //     setState(() {
-                  //       termos = value ?? false;
-                  //     })
-                  //   },
-                  // ),
                 ],
               )),
         )),

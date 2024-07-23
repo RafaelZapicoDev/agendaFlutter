@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:recipes/Model/contato.dart';
 import 'package:recipes/Model/contato_service.dart';
 
-import 'package:recipes/View/viewResources/pages/perfil.dart';
+import 'package:recipes/View/viewResources/pages/perfil_contatos.dart';
 import 'package:recipes/View/viewResources/forms/contato/cadastro_contato.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
+//pagina de busca de contatos
 class Busca extends StatefulWidget {
   const Busca({super.key});
 
@@ -35,6 +36,7 @@ class BuscaState extends State<Busca> {
           ),
         ),
         drawer: const MenuDrawer(),
+        //monta a lista com base na lista de contatos retornada do service
         body: ListView.builder(
             itemCount: service.listarContato().length,
             itemBuilder: (BuildContext context, int index) {
@@ -68,7 +70,8 @@ class BuscaState extends State<Busca> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Perfil(id: contato.id)));
+                                builder: (context) =>
+                                    PerfilContatos(id: contato.id)));
                       },
                     ),
                   ));

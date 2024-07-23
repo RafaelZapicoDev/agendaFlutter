@@ -8,8 +8,9 @@ import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-class Perfil extends StatelessWidget {
-  Perfil({super.key, required this.id});
+//pagina de perfil dos contatos
+class PerfilContatos extends StatelessWidget {
+  PerfilContatos({super.key, required this.id});
 
   final int id;
 
@@ -17,7 +18,9 @@ class Perfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Contato contato = service.listarContato().elementAt(id - 1);
+    Contato contato = service
+        .listarContato()
+        .elementAt(id - 1); // puxa os dados do contrato com base no id passado
     return Scaffold(
       appBar: Barrasuperior(nome: "Perfil"),
       drawer: const MenuDrawer(),

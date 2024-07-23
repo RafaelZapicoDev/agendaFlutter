@@ -37,6 +37,7 @@ class AuthService {
     }
   }
 
+//saindo logout
   Future<bool> signOutFromGoogle() async {
     try {
       await FirebaseAuth.instance.signOut();

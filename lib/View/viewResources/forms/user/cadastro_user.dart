@@ -7,6 +7,8 @@ import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
+//formulario para cadastro de novo usuario
+
 class CadastroUser extends StatefulWidget {
   const CadastroUser({super.key});
 
@@ -15,6 +17,7 @@ class CadastroUser extends StatefulWidget {
 }
 
 class CadastroUserState extends State<CadastroUser> {
+  //controlers de informação
   final email = TextEditingController();
   final nome = TextEditingController();
   final dataNascimento = TextEditingController();
@@ -29,6 +32,7 @@ class CadastroUserState extends State<CadastroUser> {
   final senhaConfirm = TextEditingController();
   late bool termos = false;
 
+//dispose desfaz da memoria alocada pra essas variaveis quando nao estao sendo mais usadas
   @override
   void dispose() {
     email.dispose();
@@ -38,6 +42,7 @@ class CadastroUserState extends State<CadastroUser> {
     super.dispose();
   }
 
+//método para cadastrar
   Future signUp() async {
     //CRIANDO E LOGANDO O USUARIO
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -47,6 +52,7 @@ class CadastroUserState extends State<CadastroUser> {
         generoSelecionado, telefone.text, termos);
   }
 
+//metodo pra gravar os dados adicionais do usuario
   Future addUserDetails(String nome, String email, String dataNascimento,
       String genero, String telefone, bool termos) async {
     await FirebaseFirestore.instance.collection('users').add({
@@ -63,6 +69,7 @@ class CadastroUserState extends State<CadastroUser> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+//abre o datepicker e seta a data escolhida
     Future<void> datePicker() async {
       DateTime? data = await showDatePicker(
         context: context,
@@ -134,6 +141,7 @@ class CadastroUserState extends State<CadastroUser> {
                   controller: dataNascimento,
                   validatorMessage: "Insira uma data válida",
                   onTapius: () {
+                    // chama o metodo de abri o calendario
                     datePicker();
                   },
                   type: TextFormType.text,
@@ -188,6 +196,8 @@ class CadastroUserState extends State<CadastroUser> {
                     });
                   },
                   items: generos.map<DropdownMenuItem<String>>((String genero) {
+                    // coloca os itens do dropdown com base na lista de
+                    // generos que eu coloquei la em cima
                     return DropdownMenuItem<String>(
                       value: genero,
                       child: Text(
@@ -217,6 +227,7 @@ class CadastroUserState extends State<CadastroUser> {
                   },
                 ),
                 Builder(builder: (BuildContext context) {
+                  // cadastra e manda pra verificar o login
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber),

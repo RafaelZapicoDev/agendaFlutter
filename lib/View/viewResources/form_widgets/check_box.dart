@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//checkbox personalizado
+
 class CheckboxFormField extends FormField<bool> {
   CheckboxFormField({
     super.key,

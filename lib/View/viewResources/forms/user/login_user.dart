@@ -7,6 +7,7 @@ import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 import 'package:recipes/View/viewResources/forms/user/cadastro_user.dart';
 import 'package:recipes/View/viewResources/forms/user/reset_user_password.dart';
 
+//formulario login
 class LoginUser extends StatefulWidget {
   const LoginUser({super.key});
 
@@ -26,6 +27,7 @@ class LoginUserState extends State<LoginUser> {
     super.dispose();
   }
 
+  //METODO QUE CHAMA O LOGIN NORMAL (EMAIL E SENHA)
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email.text.trim(), password: senha.text.trim());
@@ -37,6 +39,7 @@ class LoginUserState extends State<LoginUser> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        //da um espacino pra considerar a barra de tarefas do celular
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -84,7 +87,7 @@ class LoginUserState extends State<LoginUser> {
                       TextButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
+                            context, //manda pra resetar a senha ↓
                             MaterialPageRoute(
                               builder: (context) => const ResetPassword(),
                             ),
@@ -111,6 +114,8 @@ class LoginUserState extends State<LoginUser> {
                           backgroundColor: Colors.amber,
                         ),
                         onPressed: () {
+                          //ve se todos os formularios estao
+                          //validados de acordo antes de deixar logar nesse trem
                           if (formKey.currentState!.validate()) {
                             signIn();
                           }
@@ -181,7 +186,7 @@ class LoginUserState extends State<LoginUser> {
                       color: Color.fromARGB(255, 202, 204, 206),
                     ),
                   ),
-                  const GoogleButton()
+                  const GoogleButton() //botao de login com google (logica separada)
                 ],
               ),
             ),

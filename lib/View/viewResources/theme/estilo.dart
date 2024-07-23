@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//padrões de tema do aplicativo
+
 final ThemeData temaClaro = ThemeData(
     dialogTheme: const DialogTheme(
         alignment: Alignment.center,

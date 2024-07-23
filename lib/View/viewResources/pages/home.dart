@@ -6,6 +6,8 @@ import 'package:recipes/View/viewResources/forms/contato/cadastro_contato.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
+//pagina inicial do aplicativo
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -116,6 +118,7 @@ class HomeState extends State<Home> {
                           backgroundColor: Colors.amber),
                       onPressed: () => {
                             Navigator.push(
+                                //metodo para navegação
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>

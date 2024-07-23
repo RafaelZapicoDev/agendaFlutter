@@ -7,11 +7,13 @@ import 'package:recipes/View/viewResources/theme/n_tema.dart';
 import 'package:recipes/View/viewResources/firebase_options.dart';
 
 void main() async {
+  //inicializando com o firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     ChangeNotifierProvider(
+      //mudança de temas
       create: (context) => ThemeNotifier(),
       child: const MyApp(),
     ),
