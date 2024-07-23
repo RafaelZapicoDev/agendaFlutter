@@ -12,19 +12,20 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final TextFormType type;
-  final bool? obscure;
+  final bool secret;
   final Function()? onTapius;
   final bool? readOnly;
+  bool hidden = false;
 
   final String validatorMessage;
 
-  const CustomTextFormField(
+  CustomTextFormField(
       {super.key,
       required this.controller,
       required this.labelText,
       required this.type,
       required this.validatorMessage,
-      this.obscure,
+      required this.secret,
       this.onTapius,
       this.readOnly});
 
@@ -35,9 +36,22 @@ class CustomTextFormField extends StatelessWidget {
       onTap: onTapius,
       readOnly: readOnly ?? false,
       controller: controller,
-      obscureText: obscure ?? false,
+      obscureText: secret ? secret : false,
       cursorColor: Colors.blueAccent,
       decoration: InputDecoration(
+          suffixIcon: IconButton(
+              onPressed: () {
+                hidden = !hidden;
+              },
+              icon: hidden!
+                  ? const Icon(
+                      Icons.visibility,
+                      color: Colors.amber,
+                    )
+                  : const Icon(
+                      Icons.visibility_off,
+                      color: Colors.amber,
+                    )),
           labelText: labelText,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.amber),
