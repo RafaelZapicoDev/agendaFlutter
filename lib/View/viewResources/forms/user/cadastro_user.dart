@@ -45,17 +45,32 @@ class CadastroUserState extends State<CadastroUser> {
 //método para cadastrar
   Future signUp() async {
     //CRIANDO E LOGANDO O USUARIO
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.text.trim(), password: senha.text.trim());
+    UserCredential user = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: email.text.trim(), password: senha.text.trim());
     //ADICIONANDO INFORMAÇÕES AO USUARIO
-    addUserDetails(nome.text, email.text, dataNascimento.text,
-        generoSelecionado, telefone.text, termos);
+
+    addUserDetails(
+      user.user!.uid,
+      nome.text,
+      email.text,
+      dataNascimento.text,
+      generoSelecionado,
+      telefone.text,
+      termos,
+    );
   }
 
 //metodo pra gravar os dados adicionais do usuario
-  Future addUserDetails(String nome, String email, String dataNascimento,
-      String genero, String telefone, bool termos) async {
-    await FirebaseFirestore.instance.collection('users').add({
+  Future addUserDetails(
+      String userId,
+      String nome,
+      String email,
+      String dataNascimento,
+      String genero,
+      String telefone,
+      bool termos) async {
+    await FirebaseFirestore.instance.collection('users').doc(userId).set({
       'nome': nome,
       'email': email,
       'dataNascimento': dataNascimento,

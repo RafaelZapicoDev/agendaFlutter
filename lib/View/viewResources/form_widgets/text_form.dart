@@ -44,7 +44,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onTap: widget.onTapius,
       readOnly: widget.readOnly ?? false,
       controller: widget.controller,
-      obscureText: !hidden,
+      obscureText: widget.secret ? !hidden : hidden,
       cursorColor: Colors.blueAccent,
       decoration: InputDecoration(
           suffixIcon: widget.secret
