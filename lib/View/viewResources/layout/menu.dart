@@ -25,7 +25,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 106, 153, 233)),
-              accountName: const Text("Nilou"),
+              accountName: const Text("User"),
               accountEmail: Text(user?.email ??
                   'Email não registrado'), //se tiver email do usuario
               // poe o email senao informa ao usuario
