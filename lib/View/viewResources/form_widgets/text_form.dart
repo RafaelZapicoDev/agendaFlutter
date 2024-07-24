@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 //text form personalizado
 enum TextFormType {
@@ -8,18 +9,16 @@ enum TextFormType {
   numero,
 }
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
   final TextFormType type;
   final bool secret;
   final Function()? onTapius;
   final bool? readOnly;
-  bool hidden = false;
-
   final String validatorMessage;
 
-  CustomTextFormField(
+  const CustomTextFormField(
       {super.key,
       required this.controller,
       required this.labelText,
@@ -30,29 +29,43 @@ class CustomTextFormField extends StatelessWidget {
       this.readOnly});
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  var logger = Logger();
+
+  bool hidden = false;
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: const TextStyle(color: Colors.black),
-      onTap: onTapius,
-      readOnly: readOnly ?? false,
-      controller: controller,
-      obscureText: secret ? secret : false,
+      onTap: widget.onTapius,
+      readOnly: widget.readOnly ?? false,
+      controller: widget.controller,
+      obscureText: !hidden,
       cursorColor: Colors.blueAccent,
       decoration: InputDecoration(
-          suffixIcon: IconButton(
-              onPressed: () {
-                hidden = !hidden;
-              },
-              icon: hidden!
-                  ? const Icon(
-                      Icons.visibility,
-                      color: Colors.amber,
-                    )
-                  : const Icon(
-                      Icons.visibility_off,
-                      color: Colors.amber,
-                    )),
-          labelText: labelText,
+          suffixIcon: widget.secret
+              ? IconButton(
+                  icon: hidden
+                      ? const Icon(
+                          Icons.visibility_off,
+                          color: Colors.amber,
+                        )
+                      : const Icon(
+                          Icons.visibility,
+                          color: Colors.amber,
+                        ),
+                  onPressed: () {
+                    setState(() {
+                      hidden = !hidden;
+                    });
+                  },
+                )
+              : null,
+          labelText: widget.labelText,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.amber),
           ),
@@ -61,22 +74,22 @@ class CustomTextFormField extends StatelessWidget {
           ),
           labelStyle: const TextStyle(color: Colors.blueAccent)),
       validator: (value) {
-        switch (type) {
+        switch (widget.type) {
           case TextFormType.text:
             if (value == null || value.isEmpty) {
-              return validatorMessage;
+              return widget.validatorMessage;
             }
             return null;
           case TextFormType.email:
             if (value == null ||
                 !EmailValidator.validate(value) ||
                 !value.contains("@")) {
-              return validatorMessage;
+              return widget.validatorMessage;
             }
             return null;
           case TextFormType.numero:
             if (double.tryParse(value!) == null) {
-              return validatorMessage;
+              return widget.validatorMessage;
             }
             return null;
         }

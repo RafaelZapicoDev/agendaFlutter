@@ -64,13 +64,14 @@ class LoginUserState extends State<LoginUser> {
                     ),
                   ),
                   CustomTextFormField(
+                    secret: false,
                     controller: email,
                     validatorMessage: "Insira um nome email válido!",
                     type: TextFormType.email,
                     labelText: "Email de Usuário",
                   ),
                   CustomTextFormField(
-                    obscure: true,
+                    secret: true,
                     controller: senha,
                     validatorMessage: "Insira uma senha válida!",
                     type: TextFormType.text,

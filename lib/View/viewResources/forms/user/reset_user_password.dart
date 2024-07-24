@@ -104,6 +104,7 @@ class ResetPasswordState extends State<ResetPassword> {
                     ],
                   ),
                   CustomTextFormField(
+                    secret: false,
                     controller: email,
                     validatorMessage: "Insira um nome email válido!",
                     type: TextFormType.email,

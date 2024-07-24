@@ -57,6 +57,7 @@ class EditarState extends State<Editar> {
               runSpacing: 20,
               children: [
                 CustomTextFormField(
+                  secret: false,
                   controller: nome,
                   validatorMessage: "Insira um nome válido",
                   type: TextFormType.text,
@@ -64,11 +65,13 @@ class EditarState extends State<Editar> {
                 ),
                 CustomTextFormField(
                   controller: email,
+                  secret: false,
                   validatorMessage: "Insira um email válido",
                   type: TextFormType.email,
                   labelText: "Email",
                 ),
                 CustomTextFormField(
+                  secret: false,
                   controller: numero,
                   validatorMessage: "Insira um numero válido",
                   type: TextFormType.numero,

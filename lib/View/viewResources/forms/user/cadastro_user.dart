@@ -130,14 +130,17 @@ class CadastroUserState extends State<CadastroUser> {
                   validatorMessage: "Insira um email válido",
                   type: TextFormType.email,
                   labelText: "Email",
+                  secret: false,
                 ),
                 CustomTextFormField(
                   controller: nome,
+                  secret: false,
                   validatorMessage: "Insira um nome válido",
                   type: TextFormType.text,
                   labelText: "Nome Completo",
                 ),
                 CustomTextFormField(
+                  secret: false,
                   controller: dataNascimento,
                   validatorMessage: "Insira uma data válida",
                   onTapius: () {
@@ -149,24 +152,25 @@ class CadastroUserState extends State<CadastroUser> {
                   readOnly: true,
                 ),
                 CustomTextFormField(
+                  secret: false,
                   controller: telefone,
                   validatorMessage: "Insira um número válido",
                   type: TextFormType.numero,
                   labelText: "Telefone para contato",
                 ),
                 CustomTextFormField(
+                  secret: true,
                   controller: senha,
                   validatorMessage: "Insira uma senha válida",
                   type: TextFormType.text,
                   labelText: "Senha",
-                  obscure: true,
                 ),
                 CustomTextFormField(
+                  secret: true,
                   controller: senhaConfirm,
                   validatorMessage: "Insira uma senha válida",
                   type: TextFormType.text,
                   labelText: "Confirmar senha",
-                  obscure: true,
                 ),
                 DropdownButtonFormField<String>(
                   dropdownColor: Colors.white,

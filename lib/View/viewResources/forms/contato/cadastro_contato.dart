@@ -46,18 +46,21 @@ class CadastroContatoState extends State<CadastroContato> {
               runSpacing: 20,
               children: [
                 CustomTextFormField(
+                  secret: false,
                   controller: nome,
                   validatorMessage: "Insira um nome válido",
                   type: TextFormType.text,
                   labelText: "Nome Completo",
                 ),
                 CustomTextFormField(
+                  secret: false,
                   controller: email,
                   validatorMessage: "Insira um email válido",
                   type: TextFormType.email,
                   labelText: "Email",
                 ),
                 CustomTextFormField(
+                  secret: false,
                   controller: numero,
                   validatorMessage: "Insira um numero válido",
                   type: TextFormType.numero,
