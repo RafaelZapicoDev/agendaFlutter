@@ -28,12 +28,29 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/app/splash.png"
+  android: true 
+  ios: true
+
+flutter_icons:
+  image_path: "assets/app/icon.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/app/icon.png"
+
+
 dependencies:
   flutter:
     sdk: flutter
   provider: ^6.0.0
   email_validator: '^3.0.0'
   radio_group_v2: '^3.2.0'
+  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,6 +64,9 @@ dependencies:
   google_sign_in: ^6.2.1
   google_sign_in_web: ^0.12.0
   logger: ^2.4.0
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
+
 
 
 dev_dependencies:
