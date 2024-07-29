@@ -22,33 +22,33 @@ class _MenuDrawerState extends State<MenuDrawer> {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 106, 153, 233)),
-              accountName: const Text("User"),
-              accountEmail: Text(user?.email ??
-                  'Email não registrado'), //se tiver email do usuario
-              // poe o email senao informa ao usuario
-              currentAccountPicture: CircleAvatar(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset("img/LOGO.png"),
+          const DrawerHeader(
+            decoration:
+                BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage("img/sample.jpg"),
                 ),
-              )),
-          ListTile(
-            title: const Text("Home"),
-            subtitle: const Text("Página inicial"),
-            leading: const Icon(Icons.home),
-            trailing: const Icon(Icons.arrow_right),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Home()));
-            },
+                Padding(padding: EdgeInsets.only(top: 5)),
+                Text(
+                  "Exemplo Usuário",
+                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+                Text(
+                  "@nilou.example",
+                  style: TextStyle(color: Color.fromARGB(149, 255, 255, 255)),
+                ),
+              ],
+            ),
           ),
+          const Padding(padding: EdgeInsets.only(top: 10)),
           ListTile(
+            hoverColor: const Color.fromARGB(255, 246, 246, 248),
             title: const Text("Perfil"),
             subtitle: const Text("Página inicial"),
-            leading: const Icon(Icons.person_pin_sharp),
+            leading: const Icon(Icons.person),
             trailing: const Icon(Icons.arrow_right),
             onTap: () {
               Navigator.push(
@@ -60,6 +60,18 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           ListTile(
+            hoverColor: const Color.fromARGB(255, 246, 246, 248),
+            title: const Text("Home"),
+            subtitle: const Text("Página inicial"),
+            leading: const Icon(Icons.home),
+            trailing: const Icon(Icons.arrow_right),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Home()));
+            },
+          ),
+          ListTile(
+            hoverColor: const Color.fromARGB(255, 246, 246, 248),
             title: const Text("Contatos"),
             subtitle: const Text("Gerenciar contatos"),
             leading: const Icon(Icons.people),
@@ -69,7 +81,17 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   MaterialPageRoute(builder: (context) => const Busca()));
             },
           ),
+          const Padding(padding: EdgeInsets.only(top: 20)),
+          const FractionallySizedBox(
+            widthFactor: 0.9,
+            child: Divider(
+              height: 1.2,
+              color: Color.fromARGB(61, 162, 173, 179),
+            ),
+          ),
+          const Padding(padding: EdgeInsets.only(top: 20)),
           ListTile(
+            hoverColor: const Color.fromARGB(255, 246, 246, 248),
             title: const Text("Configurações"),
             subtitle: const Text("Preferências do sistema"),
             leading: const Icon(Icons.settings),
@@ -80,6 +102,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           ListTile(
+            hoverColor: const Color.fromARGB(255, 246, 246, 248),
             title: const Text("Logout"),
             subtitle: const Text("Sair do sistema"),
             leading: const Icon(Icons.logout),
