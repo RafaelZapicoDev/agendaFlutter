@@ -18,6 +18,8 @@ class GoogleButton extends StatelessWidget {
       ),
       onPressed: () async {
         await AuthService().signInWithGoogle();
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginVerify()));
       },
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,

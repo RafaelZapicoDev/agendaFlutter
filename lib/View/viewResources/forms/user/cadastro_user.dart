@@ -51,14 +51,8 @@ class CadastroUserState extends State<CadastroUser> {
               email: email.text.trim(), password: senha.text.trim());
       //ADICIONANDO INFORMAÇÕES AO USUARIO
 
-      addUserDetails(
-        user.user!.uid,
-        nome.text,
-        email.text,
-        dataNascimento.text,
-        generoSelecionado,
-        telefone.text,
-      );
+      addUserDetails(user.user!.uid, nome.text, email.text, dataNascimento.text,
+          generoSelecionado, telefone.text);
     }
   }
 
