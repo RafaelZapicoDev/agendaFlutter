@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class CheckboxFormField extends FormField<bool> {
   CheckboxFormField({
     super.key,
-    Widget? title,
+    Widget? title, //text que vai ser o o label do checkbox
     super.onSaved,
-    super.validator,
+    super.validator, //validação pra ver se tá marcado
     bool super.initialValue = false,
     bool autovalidate = false,
     Color activeColor = Colors.blueAccent,

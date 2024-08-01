@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 //text form personalizado
-enum TextFormType {
-  text,
-  email,
-  numero,
-}
+enum TextFormType { text, email, numero, password }
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -92,6 +88,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               return widget.validatorMessage;
             }
             return null;
+          case TextFormType.password:
+            if (value == null || value.isEmpty) {
+              return widget.validatorMessage;
+            }
+            if (value!.length < 6) {
+              return "A senha deve ter mais de 6 caracteres";
+            }
         }
       },
     );

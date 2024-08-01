@@ -58,27 +58,25 @@ class CadastroUserState extends State<CadastroUser> {
         dataNascimento.text,
         generoSelecionado,
         telefone.text,
-        termos,
       );
     }
   }
 
 //metodo pra gravar os dados adicionais do usuario
   Future addUserDetails(
-      String userId,
-      String nome,
-      String email,
-      String dataNascimento,
-      String genero,
-      String telefone,
-      bool termos) async {
+    String userId,
+    String nome,
+    String email,
+    String dataNascimento,
+    String genero,
+    String telefone,
+  ) async {
     await FirebaseFirestore.instance.collection('users').doc(userId).set({
       'nome': nome,
       'email': email,
       'dataNascimento': dataNascimento,
       'genero': genero,
       'telefone': telefone,
-      'termos': termos,
     });
   }
 
@@ -179,14 +177,14 @@ class CadastroUserState extends State<CadastroUser> {
                   secret: true,
                   controller: senha,
                   validatorMessage: "Insira uma senha válida",
-                  type: TextFormType.text,
+                  type: TextFormType.password,
                   labelText: "Senha",
                 ),
                 CustomTextFormField(
                   secret: true,
                   controller: senhaConfirm,
                   validatorMessage: "Insira uma senha válida",
-                  type: TextFormType.text,
+                  type: TextFormType.password,
                   labelText: "Confirmar senha",
                 ),
                 DropdownButtonFormField<String>(
