@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/Services/google_login.dart';
+import 'package:recipes/View/viewResources/pages/busca.dart';
 
 //botao de login do google
 class GoogleButton extends StatelessWidget {
