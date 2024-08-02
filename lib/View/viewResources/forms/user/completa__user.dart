@@ -13,7 +13,7 @@ class CompletaDados extends StatefulWidget {
 }
 
 class _CompletaDadosState extends State<CompletaDados> {
-  //controllers
+  // Controladores
   final email = TextEditingController();
   final nome = TextEditingController();
   final dataNascimento = TextEditingController();
@@ -24,28 +24,29 @@ class _CompletaDadosState extends State<CompletaDados> {
     "Prefiro não responder"
   ];
   String generoSelecionado = "Prefiro não responder";
-  late bool termos = false;
+  bool termos = false;
 
-  //dispose
+  // Dispose
   @override
   void dispose() {
     email.dispose();
     nome.dispose();
+    dataNascimento.dispose();
     telefone.dispose();
     super.dispose();
   }
 
-  //pega o usuario logado
+  // Pega o usuário logado
   final user = FirebaseAuth.instance.currentUser;
 
-  //metodo pra gravar os dados adicionais do usuario
+  // Método para gravar os dados adicionais do usuário
   Future addUserDetails() async {
     await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
-      'nome': nome,
-      'email': email,
-      'dataNascimento': dataNascimento,
+      'nome': nome.text,
+      'email': email.text,
+      'dataNascimento': dataNascimento.text,
       'genero': generoSelecionado,
-      'telefone': telefone,
+      'telefone': telefone.text,
     });
   }
 
@@ -53,7 +54,7 @@ class _CompletaDadosState extends State<CompletaDados> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    //abre o datepicker e seta a data escolhida
+    // Abre o datepicker e seta a data escolhida
     Future<void> datePicker() async {
       DateTime? data = await showDatePicker(
         context: context,
@@ -75,7 +76,9 @@ class _CompletaDadosState extends State<CompletaDados> {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.white),
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
           alignment: Alignment.center,
           child: Form(
             key: formKey,
@@ -111,7 +114,6 @@ class _CompletaDadosState extends State<CompletaDados> {
                   controller: dataNascimento,
                   validatorMessage: "Insira uma data válida",
                   onTapius: () {
-                    // chama o metodo de abri o calendario
                     datePicker();
                   },
                   type: TextFormType.text,
@@ -153,8 +155,6 @@ class _CompletaDadosState extends State<CompletaDados> {
                     });
                   },
                   items: generos.map<DropdownMenuItem<String>>((String genero) {
-                    // coloca os itens do dropdown com base na lista de
-                    // generos que eu coloquei la em cima
                     return DropdownMenuItem<String>(
                       value: genero,
                       child: Text(
@@ -171,10 +171,10 @@ class _CompletaDadosState extends State<CompletaDados> {
                     "Li e concordo com os termos de uso",
                     style: TextStyle(color: Colors.blueAccent),
                   ),
-                  onSaved: (value) => {
+                  onSaved: (value) {
                     setState(() {
                       termos = value ?? false;
-                    })
+                    });
                   },
                   validator: (termos) {
                     if (termos == false) {
@@ -184,39 +184,39 @@ class _CompletaDadosState extends State<CompletaDados> {
                   },
                 ),
                 Builder(builder: (BuildContext context) {
-                  // cadastra e manda pra verificar o login
                   return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber),
-                      onPressed: () => {
-                            if (formKey.currentState!.validate())
-                              {
-                                addUserDetails(),
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const LoginVerify())),
-                              }
-                          },
-                      child: const SizedBox(
-                        width: 200,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.person_add,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                            Text(
-                              "Concluído",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            )
-                          ],
-                        ),
-                      ));
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber,
+                    ),
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        await addUserDetails();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginVerify(),
+                          ),
+                        );
+                      }
+                    },
+                    child: const SizedBox(
+                      width: 200,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.person_add,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                          Text(
+                            "Concluído",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 }),
               ],
             ),

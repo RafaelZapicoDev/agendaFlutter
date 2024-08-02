@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/Services/google_login.dart';
+import 'package:recipes/View/viewResources/forms/user/completa__user.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
 
 //botao de login do google
@@ -19,7 +20,7 @@ class GoogleButton extends StatelessWidget {
       onPressed: () async {
         await AuthService().signInWithGoogle();
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoginVerify()));
+            MaterialPageRoute(builder: (context) => const CompletaDados()));
       },
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
