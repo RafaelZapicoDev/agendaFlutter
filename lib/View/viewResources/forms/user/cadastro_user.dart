@@ -119,7 +119,6 @@ class CadastroUserState extends State<CadastroUser> {
       'dataNascimento': dataNascimento,
       'genero': genero,
       'telefone': telefone,
-      'isComplete': true
     });
   }
 
