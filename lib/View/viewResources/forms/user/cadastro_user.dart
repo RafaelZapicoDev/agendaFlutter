@@ -44,6 +44,16 @@ class CadastroUserState extends State<CadastroUser> {
 
 //método para cadastrar
   Future signUp() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+            child: CircularProgressIndicator(
+          color: Colors.amber,
+        ));
+      },
+    );
+
     if (senha.text.trim() == senhaConfirm.text.trim()) {
       //CRIANDO E LOGANDO O USUARIO
 
@@ -54,7 +64,10 @@ class CadastroUserState extends State<CadastroUser> {
         //ADICIONANDO INFORMAÇÕES AO USUARIO
 
         addUserDetails(user.user!.uid, nome.text, email.text,
-            dataNascimento.text, generoSelecionado, telefone.text);
+                dataNascimento.text, generoSelecionado, telefone.text)
+            .then((e) {
+          Navigator.of(context).pop();
+        });
       } on FirebaseAuthException catch (e) {
         mensagemErro(e);
       }

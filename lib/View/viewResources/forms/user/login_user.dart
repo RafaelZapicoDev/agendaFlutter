@@ -29,8 +29,21 @@ class LoginUserState extends State<LoginUser> {
 
   //METODO QUE CHAMA O LOGIN NORMAL (EMAIL E SENHA)
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.text.trim(), password: senha.text.trim());
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+            child: CircularProgressIndicator(
+          color: Colors.amber,
+        ));
+      },
+    );
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: email.text.trim(), password: senha.text.trim())
+        .then((e) {
+      Navigator.of(context).pop();
+    });
   }
 
   @override
