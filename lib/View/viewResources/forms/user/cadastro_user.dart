@@ -46,14 +46,49 @@ class CadastroUserState extends State<CadastroUser> {
   Future signUp() async {
     if (senha.text.trim() == senhaConfirm.text.trim()) {
       //CRIANDO E LOGANDO O USUARIO
-      UserCredential user = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: email.text.trim(), password: senha.text.trim());
-      //ADICIONANDO INFORMAÇÕES AO USUARIO
 
-      addUserDetails(user.user!.uid, nome.text, email.text, dataNascimento.text,
-          generoSelecionado, telefone.text);
+      try {
+        UserCredential user = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: email.text.trim(), password: senha.text.trim());
+        //ADICIONANDO INFORMAÇÕES AO USUARIO
+
+        addUserDetails(user.user!.uid, nome.text, email.text,
+            dataNascimento.text, generoSelecionado, telefone.text);
+      } on FirebaseAuthException catch (e) {
+        mensagemErro(e);
+      }
     }
+  }
+
+  //mensagem de erro
+  void mensagemErro(FirebaseAuthException? e) {
+    Widget mensagem;
+    if (e?.code == 'email-already-in-use') {
+      mensagem = const Text("Erro, essa conta já foi cadastrada!");
+    } else {
+      mensagem = const Text("Ocorreu um erro inesperado");
+    }
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Wrap(
+              alignment: WrapAlignment.center,
+              children: [mensagem],
+            ),
+            actionsAlignment: MainAxisAlignment.end,
+            actions: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.amber),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("OK"))
+            ],
+          );
+        });
   }
 
 //metodo pra gravar os dados adicionais do usuario
