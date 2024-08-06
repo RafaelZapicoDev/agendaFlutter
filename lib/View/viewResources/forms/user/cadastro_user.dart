@@ -61,8 +61,8 @@ class CadastroUserState extends State<CadastroUser> {
         UserCredential user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: email.text.trim(), password: senha.text.trim());
-        //ADICIONANDO INFORMAÇÕES AO USUARIO
 
+        //ADICIONANDO INFORMAÇÕES AO USUARIO
         addUserDetails(user.user!.uid, nome.text, email.text,
                 dataNascimento.text, generoSelecionado, telefone.text)
             .then((e) {
@@ -119,6 +119,7 @@ class CadastroUserState extends State<CadastroUser> {
       'dataNascimento': dataNascimento,
       'genero': genero,
       'telefone': telefone,
+      'isComplete': true
     });
   }
 

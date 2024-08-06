@@ -9,6 +9,8 @@ import 'package:recipes/View/viewResources/pages/busca.dart';
 class GoogleButton extends StatelessWidget {
   const GoogleButton({super.key});
 
+  void navegaCompletaDados() {}
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -18,9 +20,10 @@ class GoogleButton extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       onPressed: () async {
-        await AuthService().signInWithGoogle();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CompletaDados()));
+        await AuthService().signInWithGoogle().then((e) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CompletaDados()));
+        });
       },
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,

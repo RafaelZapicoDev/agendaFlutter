@@ -47,6 +47,7 @@ class _CompletaDadosState extends State<CompletaDados> {
       'dataNascimento': dataNascimento.text,
       'genero': generoSelecionado,
       'telefone': telefone.text,
+      'isComplete': true
     });
   }
 

@@ -27,6 +27,30 @@ class LoginUserState extends State<LoginUser> {
     super.dispose();
   }
 
+  void mensagemErro(FirebaseAuthException? e) {
+    Widget mensagem = const Text("Cadastro inválido ou desabilitado!");
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Wrap(
+              alignment: WrapAlignment.center,
+              children: [mensagem],
+            ),
+            actionsAlignment: MainAxisAlignment.end,
+            actions: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.amber),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("OK"))
+            ],
+          );
+        });
+  }
+
   //METODO QUE CHAMA O LOGIN NORMAL (EMAIL E SENHA)
   Future signIn() async {
     showDialog(
@@ -38,12 +62,16 @@ class LoginUserState extends State<LoginUser> {
         ));
       },
     );
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: email.text.trim(), password: senha.text.trim())
-        .then((e) {
-      Navigator.of(context).pop();
-    });
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: email.text.trim(), password: senha.text.trim())
+          .then((e) {
+        Navigator.of(context).pop();
+      });
+    } on FirebaseAuthException catch (e) {
+      mensagemErro(e);
+    }
   }
 
   @override
