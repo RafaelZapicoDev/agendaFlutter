@@ -10,7 +10,7 @@ class AuthService {
       clientId:
           "34198666131-9a0mbn3mu818n0mb025c9tjpc66pilf9.apps.googleusercontent.com");
 
-  Future<User?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     try {
       // Iniciando o processo de autenticação com o Google
       final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
@@ -27,7 +27,7 @@ class AuthService {
       // Fazendo login com as credenciais criadas
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      return userCredential.user;
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       logger.e('Erro ao autenticar com o Google: ${e.message}');
       return null;

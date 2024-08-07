@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,43 +12,26 @@ Logger logger = Logger();
 class GoogleButton extends StatelessWidget {
   const GoogleButton({super.key});
 
-  Future<DocumentSnapshot> getData() async {
-    User loggedUser =
-        FirebaseAuth.instance.currentUser!; //pega o usuario logado
-    return FirebaseFirestore
-        .instance //busca no banco se existem dados desse usuario
-        .collection('users')
-        .doc(loggedUser.uid)
-        .get();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shadowColor: Colors.transparent,
+        shadowColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
       onPressed: () async {
-        await AuthService().signInWithGoogle();
-        await getData().then((e) {
-          //verifica se o usuario ja tem os dados completos
-
-          if (e.data() != null) {
+        await AuthService().signInWithGoogle().then((e) {
+          //logando com o google
+          if (e!.additionalUserInfo!.isNewUser) {
+            //se for o primeiro acesso do usuario
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginVerify(),
-              ),
-            );
-          } else if (e.data() == null) {
+                context, //manda para a pagina de completar os dados
+                MaterialPageRoute(builder: (context) => const CompletaDados()));
+          } else {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CompletaDados(),
-              ),
-            );
+                context, //manda para a pagina de completar os dados
+                MaterialPageRoute(builder: (context) => const LoginVerify()));
           }
         });
       },

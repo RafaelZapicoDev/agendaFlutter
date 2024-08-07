@@ -92,10 +92,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             if (value == null || value.isEmpty) {
               return widget.validatorMessage;
             }
-            if (value!.length < 6) {
+            if (value.length < 6) {
               return "A senha deve ter mais de 6 caracteres";
             }
         }
+        return null;
       },
     );
   }
