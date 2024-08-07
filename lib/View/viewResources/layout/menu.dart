@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/Services/google_login.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/pages/home.dart';
 import 'package:recipes/View/viewResources/pages/perfil_contatos.dart';
+
+Logger logger = Logger();
 
 class MenuDrawer extends StatefulWidget {
   const MenuDrawer({super.key});
@@ -15,33 +19,75 @@ class MenuDrawer extends StatefulWidget {
 
 class _MenuDrawerState extends State<MenuDrawer> {
   final user = FirebaseAuth
-      .instance.currentUser; //pega o usuario que ta logado no momento
+      .instance.currentUser!.uid; // Pega o usuário que está logado no momento
+
+  // PROVISORIO INFO MENU
+  late DocumentSnapshot<Map<String, dynamic>> userSnapshot;
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDocId() async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(user).get();
+    userSnapshot = snapshot;
+    return snapshot;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
-            decoration:
-                BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage("img/sample.jpg"),
-                ),
-                Padding(padding: EdgeInsets.only(top: 5)),
-                Text(
-                  "Exemplo Usuário",
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                ),
-                Text(
-                  "@nilou.example",
-                  style: TextStyle(color: Color.fromARGB(149, 255, 255, 255)),
-                ),
-              ],
-            ),
+          FutureBuilder(
+            future: getDocId(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const DrawerHeader(
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              } else if (snapshot.hasError) {
+                return const DrawerHeader(
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
+                  child: Center(child: Text('Erro ao carregar dados')),
+                );
+              } else if (snapshot.hasData && snapshot.data!.exists) {
+                final userData = snapshot.data!.data();
+                logger.i(userData);
+                final userName = userData?['nome'] ?? 'Usuário';
+                final userEmail = userData?['email'] ?? 'Email';
+
+                return DrawerHeader(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 102, 163, 243)),
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage("img/sample.jpg"),
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 5)),
+                      Text(
+                        userName,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      Text(
+                        userEmail,
+                        style: const TextStyle(
+                            color: Color.fromARGB(149, 255, 255, 255)),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return const DrawerHeader(
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
+                  child: Center(child: Text('Dados não encontrados')),
+                );
+              }
+            },
           ),
           const Padding(padding: EdgeInsets.only(top: 10)),
           ListTile(
@@ -108,7 +154,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             leading: const Icon(Icons.logout),
             trailing: const Icon(Icons.arrow_right),
             onTap: () {
-              AuthService().signOutFromGoogle(); //desloga e manda pro login
+              AuthService().signOutFromGoogle(); // Desloga e manda para o login
               // ps: se for do google ou não
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const LoginVerify()));
