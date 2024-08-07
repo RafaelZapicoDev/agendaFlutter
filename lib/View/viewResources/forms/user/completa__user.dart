@@ -190,13 +190,14 @@ class _CompletaDadosState extends State<CompletaDados> {
                     ),
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await addUserDetails();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginVerify(),
-                          ),
-                        );
+                        await addUserDetails().then((e) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginVerify(),
+                            ),
+                          );
+                        });
                       }
                     },
                     child: const SizedBox(
