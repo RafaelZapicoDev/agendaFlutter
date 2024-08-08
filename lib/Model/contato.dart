@@ -1,18 +1,13 @@
 class Contato {
-  int id;
-  String nome;
-  String numero;
-  String email;
-  String pais;
-  String genero;
-  bool termos;
-
+  final String email;
+  final String nome;
+  final String genero;
+  final String pais;
+  final String numero;
   Contato(
-      {required this.id,
-      required this.termos,
+      {required this.email,
       required this.nome,
-      required this.email,
-      required this.pais,
       required this.genero,
+      required this.pais,
       required this.numero});
 }

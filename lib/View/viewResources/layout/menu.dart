@@ -90,21 +90,21 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           const Padding(padding: EdgeInsets.only(top: 10)),
-          ListTile(
-            hoverColor: const Color.fromARGB(255, 246, 246, 248),
-            title: const Text("Perfil"),
-            subtitle: const Text("Página inicial"),
-            leading: const Icon(Icons.person),
-            trailing: const Icon(Icons.arrow_right),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PerfilContatos(
-                            id: 0,
-                          )));
-            },
-          ),
+          // ListTile(
+          //   hoverColor: const Color.fromARGB(255, 246, 246, 248),
+          //   title: const Text("Perfil"),
+          //   subtitle: const Text("Página inicial"),
+          //   leading: const Icon(Icons.person),
+          //   trailing: const Icon(Icons.arrow_right),
+          //   onTap: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => PerfilContatos(
+          //                   id: 0,
+          //                 )));
+          //   },
+          // ),
           ListTile(
             hoverColor: const Color.fromARGB(255, 246, 246, 248),
             title: const Text("Home"),
