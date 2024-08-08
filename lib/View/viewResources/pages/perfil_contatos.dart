@@ -17,13 +17,13 @@ class PerfilContatos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contato = service.listarContatosId(contatoId);
+    final contatoFuture = service.listarContatosId(contatoId);
     // Puxa os dados do contato com base no id passado
     return Scaffold(
       appBar: Barrasuperior(nome: "Perfil"),
       drawer: const MenuDrawer(),
       body: FutureBuilder(
-        future: contato,
+        future: contatoFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -32,7 +32,7 @@ class PerfilContatos extends StatelessWidget {
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text("Nenhum dado encontrado."));
           } else {
-            final contato = snapshot.data!;
+            final contato = snapshot.data as Map<String, dynamic>;
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
@@ -52,7 +52,7 @@ class PerfilContatos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        contato.nome,
+                        contato['Nome'] ?? 'Nome não disponível',
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.blueAccent,
@@ -76,7 +76,7 @@ class PerfilContatos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Email: ${contato.email}",
+                        "Email: ${contato['Email'] ?? 'Email não disponível'}",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(204, 68, 137, 255),
@@ -91,7 +91,7 @@ class PerfilContatos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Telefone: ${contato.numero}",
+                        "Telefone: ${contato['Numero'] ?? 'Número não disponível'}",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(204, 68, 137, 255),
@@ -106,7 +106,7 @@ class PerfilContatos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Gênero: ${contato.genero}",
+                        "Gênero: ${contato['Genero'] ?? 'Gênero não disponível'}",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(204, 68, 137, 255),
@@ -121,7 +121,7 @@ class PerfilContatos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "País: ${contato.pais}",
+                        "País: ${contato['Pais'] ?? 'País não disponível'}",
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(204, 68, 137, 255),
@@ -143,6 +143,7 @@ class PerfilContatos extends StatelessWidget {
         distance: 60,
         type: ExpandableFabType.up,
         children: [
+          // Uncomment and correct the Editar part if needed
           // FloatingActionButton.small(
           //   child: const Icon(Icons.settings),
           //   onPressed: () {
@@ -150,7 +151,7 @@ class PerfilContatos extends StatelessWidget {
           //       context,
           //       MaterialPageRoute(
           //         builder: (context) => Editar(
-          //           id: contato.id - 1,
+          //           id: contato['id'],  // Make sure 'id' is available in contato data
           //         ),
           //       ),
           //     );
