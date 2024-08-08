@@ -15,6 +15,16 @@ class ContatoService {
         .get();
   }
 
+  Future listarContatosId(String contatoId) async {
+    //retorna os contatos vinculados ao meu usuario
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user)
+        .collection('contatos')
+        .doc(contatoId)
+        .get();
+  }
+
   Future adicionarContato(Contato contato) async {
     //retorna os contatos vinculados ao meu usuario
     await FirebaseFirestore.instance

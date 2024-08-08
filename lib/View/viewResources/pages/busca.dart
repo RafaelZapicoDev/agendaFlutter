@@ -58,6 +58,7 @@ class BuscaState extends State<Busca> {
                     itemCount: contatos.length,
                     itemBuilder: (context, index) {
                       final contato = contatos[index].data();
+                      final contatoId = contatos[index].id;
                       return Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -84,16 +85,20 @@ class BuscaState extends State<Busca> {
                                 )
                               ],
                             ),
-                            // trailing: IconButton(
-                            //   icon: const Icon(Icons.arrow_right),
-                            //   onPressed: () {
-                            //     Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) =>
-                            //                 PerfilContatos()));
-                            //   },
-                            // ),
+                            trailing: IconButton(
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PerfilContatos(
+                                              contatoId: contatoId,
+                                            )));
+                              },
+                            ),
                           ));
                     });
               }
