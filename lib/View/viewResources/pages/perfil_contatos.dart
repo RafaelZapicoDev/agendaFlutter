@@ -7,18 +7,16 @@ import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-// Página de perfil dos contatos
 class PerfilContatos extends StatelessWidget {
   PerfilContatos({super.key, required this.contatoId});
 
   final String contatoId;
-
   final ContatoService service = ContatoService();
 
   @override
   Widget build(BuildContext context) {
     final contatoFuture = service.listarContatosId(contatoId);
-    // Puxa os dados do contato com base no id passado
+
     return Scaffold(
       appBar: Barrasuperior(nome: "Perfil"),
       drawer: const MenuDrawer(),
@@ -32,7 +30,7 @@ class PerfilContatos extends StatelessWidget {
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text("Nenhum dado encontrado."));
           } else {
-            final contato = snapshot.data as Map<String, dynamic>;
+            final contato = snapshot.data.data() as Map<String, dynamic>;
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
@@ -143,25 +141,11 @@ class PerfilContatos extends StatelessWidget {
         distance: 60,
         type: ExpandableFabType.up,
         children: [
-          // Uncomment and correct the Editar part if needed
-          // FloatingActionButton.small(
-          //   child: const Icon(Icons.settings),
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => Editar(
-          //           id: contato['id'],  // Make sure 'id' is available in contato data
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
           FloatingActionButton.small(
             child: const Icon(Icons.delete_outline),
             onPressed: () {
               service.removerContato(contatoId);
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Busca()),
               );
