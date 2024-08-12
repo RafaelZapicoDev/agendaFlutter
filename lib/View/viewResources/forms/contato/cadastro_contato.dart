@@ -24,14 +24,13 @@ class CadastroContatoState extends State<CadastroContato> {
   final RadioGroupController genero = RadioGroupController();
   final List<String> paises = ["Brasil", "Colombia", "Mexico"]; //substituir
   late String pais = '';
-  late bool termos = false;
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: Barrasuperior(nome: "Cadastro"),
+      appBar: Barrasuperior(nome: "Novo Contato"),
       drawer: const MenuDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -46,6 +45,43 @@ class CadastroContatoState extends State<CadastroContato> {
               alignment: WrapAlignment.center,
               runSpacing: 20,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.blueGrey[100],
+                            minRadius: 90,
+                            child: const Icon(
+                              Icons.person_rounded,
+                              size: 130,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            ),
+                          ),
+                          const Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              minRadius: 25,
+                              backgroundColor:
+                                  Color.fromARGB(255, 237, 241, 248),
+                              child: IconButton(
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 CustomTextFormField(
                   secret: false,
                   controller: nome,
@@ -69,6 +105,10 @@ class CadastroContatoState extends State<CadastroContato> {
                 ),
                 DropdownButtonFormField<String>(
                   dropdownColor: Colors.white,
+                  icon: const Icon(
+                    Icons.arrow_drop_down_sharp,
+                    color: Colors.blueAccent,
+                  ),
                   decoration: const InputDecoration(
                     labelText: "País de Origem",
                     focusedBorder: OutlineInputBorder(
@@ -124,23 +164,6 @@ class CadastroContatoState extends State<CadastroContato> {
                     ),
                     activeColor: Colors.amber,
                   ),
-                ),
-                CheckboxFormField(
-                  title: const Text(
-                    "Li e concordo com os termos de uso",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                  onSaved: (value) => {
-                    setState(() {
-                      termos = value ?? false;
-                    })
-                  },
-                  validator: (termos) {
-                    if (termos == false) {
-                      return "É preciso concordar para validar seu cadastro!";
-                    }
-                    return null;
-                  },
                 ),
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(

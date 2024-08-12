@@ -29,7 +29,7 @@ class EditarContatoState extends State<EditarContato> {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: Barrasuperior(nome: "Cadastro"),
+      appBar: Barrasuperior(nome: "Editar Contato"),
       drawer: const MenuDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -44,6 +44,43 @@ class EditarContatoState extends State<EditarContato> {
               alignment: WrapAlignment.center,
               runSpacing: 20,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.blueGrey[100],
+                            minRadius: 90,
+                            child: const Icon(
+                              Icons.person_rounded,
+                              size: 130,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            ),
+                          ),
+                          const Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              minRadius: 25,
+                              backgroundColor:
+                                  Color.fromARGB(255, 237, 241, 248),
+                              child: IconButton(
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 CustomTextFormField(
                   secret: false,
                   controller: nome,

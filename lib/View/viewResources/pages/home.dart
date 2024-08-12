@@ -20,7 +20,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Barrasuperior(
-        nome: "Agenda Contatos",
+        nome: "Starmail Agenda",
       ),
       drawer: const MenuDrawer(),
       body: SingleChildScrollView(
