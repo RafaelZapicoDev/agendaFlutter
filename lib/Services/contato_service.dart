@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:recipes/Model/contato.dart';
+import 'package:recipes/Model/contato_model.dart';
 
 class ContatoService {
   final user = FirebaseAuth
@@ -37,6 +37,7 @@ class ContatoService {
       'Nome': contato.nome,
       'Numero': contato.numero,
       'Pais': contato.pais,
+      'Ultima Interacao': contato.ultimaIteracao
     });
   }
 
@@ -53,6 +54,7 @@ class ContatoService {
       'Nome': contato.nome,
       'Numero': contato.numero,
       'Pais': contato.pais,
+      'Ultima Interacao': contato.ultimaIteracao
     });
   }
 

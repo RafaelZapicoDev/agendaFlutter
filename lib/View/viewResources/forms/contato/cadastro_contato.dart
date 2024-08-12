@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:radio_group_v2/radio_group_v2.dart';
-import 'package:recipes/Model/contato.dart';
+import 'package:recipes/Model/contato_model.dart';
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
 import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
@@ -185,13 +186,15 @@ class CadastroContatoState extends State<CadastroContato> {
 
   void cadastrar() {
     ContatoService service = ContatoService();
+    Timestamp momento = Timestamp.fromDate(DateTime.now());
 
     Contato contato = Contato(
         nome: nome.text,
         email: email.text,
         pais: pais,
         genero: genero.value,
-        numero: numero.text);
+        numero: numero.text,
+        ultimaIteracao: momento);
 
     service.adicionarContato(contato);
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:recipes/Model/contato.dart';
+import 'package:recipes/Model/contato_model.dart';
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/forms/contato/editar_contato.dart';
 import 'package:recipes/View/viewResources/pages/busca.dart';
@@ -142,6 +142,17 @@ class PerfilContatos extends StatelessWidget {
         type: ExpandableFabType.up,
         children: [
           FloatingActionButton.small(
+            child: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditarContato(id: contatoId)),
+              );
+            },
+          ),
+          FloatingActionButton.small(
+            backgroundColor: Colors.redAccent,
             child: const Icon(Icons.delete_outline),
             onPressed: () {
               service.removerContato(contatoId);
