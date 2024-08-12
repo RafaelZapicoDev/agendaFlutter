@@ -17,7 +17,73 @@ class PerfilContatos extends StatelessWidget {
   Widget build(BuildContext context) {
     final contatoFuture = service.listarContatosId(contatoId);
 
+    void popUp() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: const Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  Text(
+                    "Tem certeza que deseja excluir o contato da sua agenda XXXX ?",
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.blueAccent,
+                        backgroundColor:
+                            const Color.fromARGB(255, 221, 221, 221)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancelar")),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.redAccent),
+                    onPressed: () {
+                      service.removerContato(contatoId);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Busca()));
+                    },
+                    child: const Text("Excluir"))
+              ],
+            );
+          });
+    }
+
     return Scaffold(
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: ExpandableFab(
+        distance: 60,
+        type: ExpandableFabType.up,
+        children: [
+          FloatingActionButton.small(
+            child: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditarContato(id: contatoId)),
+              );
+            },
+          ),
+          FloatingActionButton.small(
+            backgroundColor: Colors.redAccent,
+            child: const Icon(Icons.delete_outline),
+            onPressed: () {
+              popUp();
+            },
+          ),
+        ],
+      ),
       appBar: Barrasuperior(nome: "Perfil"),
       drawer: const MenuDrawer(),
       body: FutureBuilder(
@@ -135,34 +201,6 @@ class PerfilContatos extends StatelessWidget {
             );
           }
         },
-      ),
-      floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: ExpandableFab(
-        distance: 60,
-        type: ExpandableFabType.up,
-        children: [
-          FloatingActionButton.small(
-            child: const Icon(Icons.edit),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
-              );
-            },
-          ),
-          FloatingActionButton.small(
-            backgroundColor: Colors.redAccent,
-            child: const Icon(Icons.delete_outline),
-            onPressed: () {
-              service.removerContato(contatoId);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const Busca()),
-              );
-            },
-          ),
-        ],
       ),
     );
   }

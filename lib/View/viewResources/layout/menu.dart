@@ -43,7 +43,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 return const DrawerHeader(
                   decoration:
                       BoxDecoration(color: Color.fromARGB(255, 102, 163, 243)),
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.amberAccent,
+                  )),
                 );
               } else if (snapshot.hasError) {
                 return const DrawerHeader(
