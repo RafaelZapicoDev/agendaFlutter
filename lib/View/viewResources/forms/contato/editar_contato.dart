@@ -4,7 +4,7 @@ import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:recipes/Model/contato_model.dart';
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
-import 'package:recipes/View/viewResources/pages/busca.dart';
+import 'package:recipes/View/viewResources/pages/pages/busca.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
