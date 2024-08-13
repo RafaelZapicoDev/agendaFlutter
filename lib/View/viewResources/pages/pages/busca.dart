@@ -1,9 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/pages/pages/perfil_contatos.dart';
@@ -15,9 +12,9 @@ import 'package:recipes/View/viewResources/layout/menu.dart';
 Color getRandomPastelColor() {
   final Random random = Random();
 
-  final int red = 70 + random.nextInt(146); // 180 + (0 a 75)
-  final int green = 70 + random.nextInt(146);
-  final int blue = 70 + random.nextInt(146);
+  final int red = 1200 + random.nextInt(136);
+  final int green = 10 + random.nextInt(146);
+  final int blue = 80 + random.nextInt(146);
 
   return Color.fromARGB(200, red, green, blue);
 }
@@ -96,7 +93,7 @@ class BuscaState extends State<Busca> {
                     padding: const EdgeInsets.only(
                         top: 0, bottom: 0, left: 0, right: 5),
                     margin: const EdgeInsets.only(
-                        left: 10, right: 10, bottom: 5, top: 5),
+                        left: 15, right: 10, bottom: 5, top: 5),
                     child: Row(
                       children: [
                         Container(

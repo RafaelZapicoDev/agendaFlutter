@@ -41,12 +41,21 @@ class ResetPasswordState extends State<ResetPassword> {
               alignment: WrapAlignment.center,
               children: [mensagem],
             ),
-            actionsAlignment: MainAxisAlignment.end,
+            actionsAlignment: MainAxisAlignment.center,
             actions: [
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.amber),
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    textStyle: const TextStyle(
+                        fontSize: 20,
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w500),
+                    padding: const EdgeInsets.only(
+                        top: 20, bottom: 20, left: 30, right: 30),
+                    backgroundColor: Colors.redAccent,
+                    shape: const ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: const Text("OK"))
             ],
@@ -86,8 +95,8 @@ class ResetPasswordState extends State<ResetPassword> {
                 runSpacing: 20,
                 children: [
                   SizedBox(
-                    width: 4300,
-                    height: 400,
+                    width: 300,
+                    height: 350,
                     child: Image.asset(
                       'img/LOGO.png',
                       fit: BoxFit.contain,
@@ -114,9 +123,19 @@ class ResetPasswordState extends State<ResetPassword> {
                   Builder(builder: (BuildContext context) {
                     return ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            backgroundColor: Colors.blueAccent),
+                          foregroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          textStyle: const TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 0.5,
+                              fontWeight: FontWeight.w500),
+                          padding: const EdgeInsets.only(
+                              top: 15, bottom: 15, left: 30, right: 30),
+                          backgroundColor: Colors.blueAccent,
+                          shape: const ContinuousRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                        ),
                         onPressed: () => {
                               if (formKey.currentState!.validate())
                                 {resetPassword(context)}

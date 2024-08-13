@@ -150,10 +150,19 @@ class LoginUserState extends State<LoginUser> {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          backgroundColor: Colors.amber,
+                          foregroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          textStyle: const TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 0.5,
+                              fontWeight: FontWeight.w500),
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 20, left: 35, right: 35),
+                          backgroundColor:
+                              const Color.fromARGB(255, 235, 195, 52),
+                          shape: const ContinuousRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                         ),
                         onPressed: () {
                           //ve se todos os formularios estao
@@ -170,7 +179,7 @@ class LoginUserState extends State<LoginUser> {
                               Icon(
                                 Icons.login_rounded,
                                 color: Colors.white,
-                                size: 35,
+                                size: 25,
                               ),
                               Text(
                                 "Login",
@@ -185,10 +194,18 @@ class LoginUserState extends State<LoginUser> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          backgroundColor: Colors.blueAccent[200],
+                          foregroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          textStyle: const TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 0.5,
+                              fontWeight: FontWeight.w500),
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 20, left: 35, right: 35),
+                          backgroundColor: Colors.blueAccent,
+                          shape: const ContinuousRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -206,7 +223,7 @@ class LoginUserState extends State<LoginUser> {
                               Icon(
                                 Icons.arrow_circle_up,
                                 color: Colors.white,
-                                size: 35,
+                                size: 25,
                               ),
                               Text(
                                 "Cadastro",

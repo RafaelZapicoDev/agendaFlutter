@@ -4,7 +4,6 @@ import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:recipes/Model/contato_model.dart';
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/pages/pages/busca.dart';
-import 'package:recipes/View/viewResources/form_widgets/check_box.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/form_widgets/text_form.dart';
 
@@ -168,7 +167,19 @@ class CadastroContatoState extends State<CadastroContato> {
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber),
+                        foregroundColor: Colors.white,
+                        textStyle: const TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.w500),
+                        padding: const EdgeInsets.only(
+                            top: 20, bottom: 20, left: 30, right: 30),
+                        backgroundColor:
+                            const Color.fromARGB(255, 233, 192, 42),
+                        shape: const ContinuousRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                      ),
                       onPressed: () => {
                             // cadastrarContato(),
                             if (formKey.currentState!.validate())
@@ -191,9 +202,7 @@ class CadastroContatoState extends State<CadastroContato> {
                               size: 25,
                             ),
                             Text(
-                              "Cadastrar",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              "Adicionar",
                             )
                           ],
                         ),

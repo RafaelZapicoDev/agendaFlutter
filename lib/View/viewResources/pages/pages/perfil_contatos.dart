@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:recipes/Model/contato_model.dart';
 import 'package:recipes/Services/contato_service.dart';
 import 'package:recipes/View/viewResources/forms/contato/editar_contato.dart';
 import 'package:recipes/View/viewResources/pages/pages/busca.dart';
@@ -35,17 +34,34 @@ class PerfilContatos extends StatelessWidget {
               actions: [
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.blueAccent,
-                        backgroundColor:
-                            const Color.fromARGB(255, 221, 221, 221)),
+                      foregroundColor: Colors.blueGrey,
+                      textStyle: const TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.w500),
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 20, left: 30, right: 30),
+                      backgroundColor: const Color.fromARGB(255, 219, 219, 219),
+                      shape: const ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                    ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                     child: const Text("Cancelar")),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.redAccent),
+                      foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      textStyle: const TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.w500),
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 20, left: 30, right: 30),
+                      backgroundColor: Colors.redAccent,
+                      shape: const ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                    ),
                     onPressed: () {
                       service.removerContato(contatoId);
                       Navigator.push(

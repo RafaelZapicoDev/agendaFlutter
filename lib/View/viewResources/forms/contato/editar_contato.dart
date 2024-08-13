@@ -163,7 +163,19 @@ class EditarContatoState extends State<EditarContato> {
                 Builder(builder: (BuildContext context) {
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber),
+                        foregroundColor: Colors.white,
+                        textStyle: const TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.w500),
+                        padding: const EdgeInsets.only(
+                            top: 20, bottom: 20, left: 30, right: 30),
+                        backgroundColor:
+                            const Color.fromARGB(255, 233, 192, 42),
+                        shape: const ContinuousRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                      ),
                       onPressed: () => {
                             // cadastrarContato(),
                             if (formKey.currentState!.validate())
@@ -181,14 +193,12 @@ class EditarContatoState extends State<EditarContato> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Icon(
-                              Icons.person_add,
+                              Icons.edit,
                               color: Colors.white,
                               size: 25,
                             ),
                             Text(
-                              "Cadastrar",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              "Editar",
                             )
                           ],
                         ),

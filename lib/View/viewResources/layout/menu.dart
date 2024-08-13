@@ -6,7 +6,6 @@ import 'package:recipes/Controller/login_verify.dart';
 import 'package:recipes/Services/google_login.dart';
 import 'package:recipes/View/viewResources/pages/pages/busca.dart';
 import 'package:recipes/View/viewResources/pages/pages/home.dart';
-import 'package:recipes/View/viewResources/pages/pages/perfil_contatos.dart';
 
 Logger logger = Logger();
 

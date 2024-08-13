@@ -291,7 +291,19 @@ class CadastroUserState extends State<CadastroUser> {
                   // cadastra e manda pra verificar o login
                   return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber),
+                        foregroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        textStyle: const TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.w500),
+                        padding: const EdgeInsets.only(
+                            top: 20, bottom: 20, left: 30, right: 30),
+                        backgroundColor: Colors.amber,
+                        shape: const ContinuousRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                      ),
                       onPressed: () => {
                             if (formKey.currentState!.validate())
                               {
@@ -315,8 +327,6 @@ class CadastroUserState extends State<CadastroUser> {
                             ),
                             Text(
                               "Cadastrar-se",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
                             )
                           ],
                         ),
