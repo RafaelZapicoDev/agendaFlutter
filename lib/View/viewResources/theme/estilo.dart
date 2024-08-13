@@ -32,6 +32,5 @@ final ThemeData temaEscuro = ThemeData(
       backgroundColor: Color.fromARGB(255, 6, 26, 61),
       foregroundColor: Colors.white),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      foregroundColor: Colors.white,
-      backgroundColor: Color.fromARGB(255, 255, 179, 0)),
+      foregroundColor: Colors.white, backgroundColor: Colors.amber),
 );

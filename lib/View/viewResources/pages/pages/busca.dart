@@ -93,7 +93,7 @@ class BuscaState extends State<Busca> {
                     padding: const EdgeInsets.only(
                         top: 0, bottom: 0, left: 0, right: 5),
                     margin: const EdgeInsets.only(
-                        left: 15, right: 10, bottom: 5, top: 5),
+                        left: 15, right: 10, bottom: 0, top: 10),
                     child: Row(
                       children: [
                         Container(
