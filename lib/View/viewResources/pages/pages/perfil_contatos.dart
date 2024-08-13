@@ -290,7 +290,7 @@ class PerfilContatos extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
                   margin: const EdgeInsets.only(left: 15, right: 15),
                   width: double.infinity,
-                  height: 450,
+                  height: 460,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
