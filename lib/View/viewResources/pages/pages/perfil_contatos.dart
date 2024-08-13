@@ -16,6 +16,7 @@ class PerfilContatos extends StatelessWidget {
   Widget build(BuildContext context) {
     final contatoFuture = service.listarContatosId(contatoId);
 
+    //pop up para excluir contato
     void popUp() {
       showDialog(
           context: context,
@@ -76,6 +77,7 @@ class PerfilContatos extends StatelessWidget {
     }
 
     return Scaffold(
+      //botao de ações do contato
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
         distance: 60,
@@ -100,120 +102,89 @@ class PerfilContatos extends StatelessWidget {
           ),
         ],
       ),
+
+      //layout basico
       appBar: Barrasuperior(nome: "Perfil"),
       drawer: const MenuDrawer(),
+
+      //
       body: FutureBuilder(
         future: contatoFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.amber,
+            ));
           } else if (snapshot.hasError) {
             return const Center(child: Text("Erro ao carregar dados."));
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text("Nenhum dado encontrado."));
           } else {
             final contato = snapshot.data.data() as Map<String, dynamic>;
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                children: [
-                  const Padding(padding: EdgeInsets.only(bottom: 25)),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.person,
-                        size: 90,
+            return Column(
+              children: [
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 200,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              bottom: 2,
+                              left: 175,
+                              right: 0,
+                              child: Text(
+                                contato['Nome'],
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 77, 101, 112),
+                                    fontSize: 36),
+                              )),
+                        ],
                       ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 25)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        contato['Nome'] ?? 'Nome não disponível',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.blueAccent,
-                          letterSpacing: 1,
-                          wordSpacing: 8,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 10)),
-                  const FractionallySizedBox(
-                    widthFactor: 1.05,
-                    child: Divider(
-                      color: Colors.amber,
-                      height: 5,
                     ),
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 25)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Email: ${contato['Email'] ?? 'Email não disponível'}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(204, 68, 137, 255),
-                          letterSpacing: 1,
-                          wordSpacing: 8,
-                        ),
+                    const Positioned(
+                      left: 30,
+                      bottom: -50,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            minRadius: 60,
+                            backgroundColor: Color.fromARGB(255, 180, 205, 252),
+                            child: IconButton(
+                              onPressed: null,
+                              icon: Icon(
+                                Icons.person_rounded,
+                                size: 90,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              minRadius: 5,
+                              backgroundColor:
+                                  Color.fromARGB(255, 237, 241, 248),
+                              child: IconButton(
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 15)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Telefone: ${contato['Numero'] ?? 'Número não disponível'}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(204, 68, 137, 255),
-                          letterSpacing: 1,
-                          wordSpacing: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 15)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Gênero: ${contato['Genero'] ?? 'Gênero não disponível'}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(204, 68, 137, 255),
-                          letterSpacing: 1,
-                          wordSpacing: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 15)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "País: ${contato['Pais'] ?? 'País não disponível'}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(204, 68, 137, 255),
-                          letterSpacing: 1,
-                          wordSpacing: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 45)),
-                ],
-              ),
+                    )
+                  ],
+                ),
+              ],
             );
           }
         },
