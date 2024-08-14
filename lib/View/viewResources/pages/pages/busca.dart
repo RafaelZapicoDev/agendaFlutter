@@ -29,6 +29,15 @@ class Busca extends StatefulWidget {
 
 class BuscaState extends State<Busca> {
   ContatoService service = ContatoService();
+  bool filterFavorite = false;
+
+  Future Busca() {
+    if (filterFavorite) {
+      return service.listarContatosFavorite();
+    } else {
+      return service.listarContatos();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +65,14 @@ class BuscaState extends State<Busca> {
             onPressed: () {},
           ),
           FloatingActionButton.small(
-            child: const Icon(Icons.star_border),
-            onPressed: () {},
+            child: filterFavorite
+                ? const Icon(Icons.star_rounded)
+                : const Icon(Icons.star_border_rounded),
+            onPressed: () {
+              setState(() {
+                filterFavorite = !filterFavorite;
+              });
+            },
           ),
         ],
       ),
@@ -66,7 +81,7 @@ class BuscaState extends State<Busca> {
 
       // Monta a lista com base na lista de contatos retornada do service
       body: FutureBuilder(
-        future: service.listarContatos(),
+        future: Busca(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -112,18 +127,37 @@ class BuscaState extends State<Busca> {
                                   Color.fromARGB(255, 255, 255, 255),
                               child: Icon(Icons.person_rounded),
                             ),
-                            trailing: IconButton(
-                              icon: const Icon(
-                                  Icons.keyboard_arrow_right_rounded),
-                              onPressed: () {
-                                Navigator.push(
-                                    //método para navegação
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PerfilContatos(
-                                              contatoId: contatoId,
-                                            )));
-                              },
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  color: Colors.amber,
+                                  icon: contato['Favorito']
+                                      ? const Icon(Icons.star_rounded)
+                                      : const Icon(Icons.star_border_rounded),
+                                  onPressed: () {
+                                    setState(() {
+                                      contato['Favorito'] =
+                                          !contato['Favorito'];
+                                    });
+                                    service.favoritaContato(contatoId);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_right_rounded),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        //método para navegação
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PerfilContatos(
+                                                  contatoId: contatoId,
+                                                )));
+                                  },
+                                ),
+                              ],
                             ),
                             title: Row(
                               children: [

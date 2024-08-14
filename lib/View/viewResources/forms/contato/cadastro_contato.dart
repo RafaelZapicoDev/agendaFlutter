@@ -221,12 +221,13 @@ class CadastroContatoState extends State<CadastroContato> {
     Timestamp momento = Timestamp.fromDate(DateTime.now());
 
     Contato contato = Contato(
-        nome: nome.text,
-        email: email.text,
-        pais: pais,
-        genero: genero.value,
-        numero: numero.text,
-        ultimaIteracao: momento);
+      nome: nome.text,
+      email: email.text,
+      pais: pais,
+      genero: genero.value,
+      numero: numero.text,
+      ultimaIteracao: momento,
+    );
 
     service.adicionarContato(contato);
   }

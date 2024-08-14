@@ -6,12 +6,15 @@ class Contato {
   final String genero;
   final String pais;
   final String numero;
+  bool isFavorito;
   final Timestamp ultimaIteracao;
-  Contato(
-      {required this.email,
-      required this.nome,
-      required this.genero,
-      required this.pais,
-      required this.numero,
-      required this.ultimaIteracao});
+
+  Contato({
+    required this.email,
+    required this.nome,
+    required this.genero,
+    required this.pais,
+    required this.numero,
+    required this.ultimaIteracao,
+  }) : isFavorito = false;
 }

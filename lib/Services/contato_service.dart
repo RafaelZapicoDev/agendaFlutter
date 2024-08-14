@@ -15,6 +15,16 @@ class ContatoService {
         .get();
   }
 
+  Future listarContatosFavorite() async {
+    //retorna os contatos vinculados ao meu usuario
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user)
+        .collection('contatos')
+        .orderBy('Favorito')
+        .get();
+  }
+
   Future listarContatosId(String contatoId) async {
     //retorna os contatos vinculados ao meu usuario
     return await FirebaseFirestore.instance
@@ -37,7 +47,8 @@ class ContatoService {
       'Nome': contato.nome,
       'Numero': contato.numero,
       'Pais': contato.pais,
-      'Ultima Interacao': contato.ultimaIteracao
+      'Ultima Interacao': contato.ultimaIteracao,
+      'Favorito': contato.isFavorito
     });
   }
 
@@ -54,8 +65,20 @@ class ContatoService {
       'Nome': contato.nome,
       'Numero': contato.numero,
       'Pais': contato.pais,
-      'Ultima Interacao': contato.ultimaIteracao
+      'Ultima Interacao': contato.ultimaIteracao,
     });
+  }
+
+  //favorita ou n um contato
+  Future<void> favoritaContato(String contatoId) async {
+    DocumentReference contatoRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user)
+        .collection('contatos')
+        .doc(contatoId);
+    DocumentSnapshot contatoSnapshot = await contatoRef.get();
+    bool atualFavorito = contatoSnapshot.get('Favorito');
+    await contatoRef.update({'Favorito': !atualFavorito});
   }
 
   Future removerContato(String contatoId) async {
