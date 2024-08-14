@@ -10,6 +10,7 @@ class StorageService with ChangeNotifier {
   final firebaseStorage = FirebaseStorage.instance;
 
   List<String> _ImgUrls = [];
+  String singleImgUrl = '';
 
   bool _IsLoading = false;
   bool _IsUpdating = false;
@@ -18,7 +19,7 @@ class StorageService with ChangeNotifier {
   bool get IsLoading => _IsLoading;
   bool get IsUpdating => _IsUpdating;
 
-  //lendo imagens
+  //lendo todas as imagens
   Future<void> fetchImages() async {
     _IsLoading = true;
 
@@ -30,6 +31,19 @@ class StorageService with ChangeNotifier {
 
     _IsLoading = false;
     notifyListeners();
+  }
+
+  //lendo imagem a partir de uma unica url
+  Future<String?> fetchImageFromUrl(String imageUrl) async {
+    try {
+      final String downloadUrl =
+          await firebaseStorage.refFromURL(imageUrl).getDownloadURL();
+      singleImgUrl = downloadUrl;
+      return downloadUrl ?? null;
+    } catch (e) {
+      Logger().e("Erro ao buscar imagem: $e");
+      throw Exception("Erro ao buscar imagem");
+    }
   }
 
   //deletando imagens
@@ -53,7 +67,7 @@ class StorageService with ChangeNotifier {
 
   //fazendo upload de uma imagem
 
-  Future<void> uploadImage() async {
+  Future<void> uploadImage(String idContato) async {
     _IsUpdating = true;
     notifyListeners();
 
@@ -64,11 +78,11 @@ class StorageService with ChangeNotifier {
 
     File file = File(image.path);
     try {
-      String filePath = 'uploaded_images/${DateTime.now()}.png';
+      String filePath = 'uploaded_images/$idContato.png';
 
       await firebaseStorage.ref(filePath).putFile(file);
       String dowloadUrl = await firebaseStorage.ref(filePath).getDownloadURL();
-      _ImgUrls.add(dowloadUrl);
+      singleImgUrl = dowloadUrl;
       notifyListeners();
     } catch (e) {
       Logger().e("Erro ao deletar imagem : $e");

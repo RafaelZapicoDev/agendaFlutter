@@ -2,23 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:intl/intl.dart'; // Adicione essa linha
 import 'package:cloud_firestore/cloud_firestore.dart'; // Adicione essa linha
+import 'package:provider/provider.dart';
 import 'package:recipes/Services/contato_service.dart';
+import 'package:recipes/Services/storage_service.dart';
 
 import 'package:recipes/View/viewResources/forms/contato/editar_contato.dart';
+import 'package:recipes/View/viewResources/pages/page_widgets/profile_field.dart';
 
 import 'package:recipes/View/viewResources/pages/pages/busca.dart';
 import 'package:recipes/View/viewResources/layout/barra_superior.dart';
 import 'package:recipes/View/viewResources/layout/menu.dart';
 
-class PerfilContatos extends StatelessWidget {
-  PerfilContatos({super.key, required this.contatoId});
+class PerfilContatos extends StatefulWidget {
+  const PerfilContatos({super.key, required this.contatoId});
 
   final String contatoId;
+
+  @override
+  State<PerfilContatos> createState() => _PerfilContatosState();
+}
+
+class _PerfilContatosState extends State<PerfilContatos> {
   final ContatoService service = ContatoService();
 
   @override
   Widget build(BuildContext context) {
-    final contatoFuture = service.listarContatosId(contatoId);
+    final contatoFuture = service.listarContatosId(widget.contatoId);
 
     //pop up para excluir contato
     void popUp() {
@@ -68,7 +77,7 @@ class PerfilContatos extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                     ),
                     onPressed: () {
-                      service.removerContato(contatoId);
+                      service.removerContato(widget.contatoId);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -93,7 +102,7 @@ class PerfilContatos extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
+                    builder: (context) => EditarContato(id: widget.contatoId)),
               );
             },
             child: const Icon(Icons.phone_enabled_rounded),
@@ -105,7 +114,7 @@ class PerfilContatos extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
+                    builder: (context) => EditarContato(id: widget.contatoId)),
               );
             },
           ),
@@ -115,7 +124,7 @@ class PerfilContatos extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
+                    builder: (context) => EditarContato(id: widget.contatoId)),
               );
             },
           ),
@@ -125,7 +134,7 @@ class PerfilContatos extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
+                    builder: (context) => EditarContato(id: widget.contatoId)),
               );
             },
           ),
@@ -135,7 +144,7 @@ class PerfilContatos extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditarContato(id: contatoId)),
+                    builder: (context) => EditarContato(id: widget.contatoId)),
               );
             },
           ),
@@ -253,18 +262,14 @@ class PerfilContatos extends StatelessWidget {
                       bottom: 0,
                       child: Stack(
                         children: [
+                          //foto
                           CircleAvatar(
-                            minRadius: 55,
-                            backgroundColor: Color.fromARGB(255, 180, 205, 252),
-                            child: IconButton(
-                              onPressed: null,
-                              icon: Icon(
+                              minRadius: 55,
+                              child: Icon(
                                 Icons.person_rounded,
                                 size: 90,
                                 color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                          ),
+                              )),
                           Positioned(
                             bottom: 0,
                             right: 0,
@@ -305,91 +310,13 @@ class PerfilContatos extends StatelessWidget {
                           color: Color.fromARGB(100, 96, 125, 139),
                         ),
                       ),
-                      const Padding(padding: EdgeInsets.only(top: 43)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Nome completo :",
-                            style: TextStyle(
-                                color: Color.fromARGB(228, 56, 77, 87),
-                                fontSize: 20),
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Text(contato['Nome'],
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 88, 115, 128),
-                                  fontSize: 20))
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 40)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Email de contato :",
-                            style: TextStyle(
-                                color: Color.fromARGB(228, 56, 77, 87),
-                                fontSize: 20),
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Text(contato['Email'],
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 88, 115, 128),
-                                  fontSize: 20))
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 40)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Número para contato :",
-                            style: TextStyle(
-                                color: Color.fromARGB(228, 56, 77, 87),
-                                fontSize: 20),
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Text(contato['Numero'],
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 88, 115, 128),
-                                  fontSize: 20))
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 40)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Genero :",
-                            style: TextStyle(
-                                color: Color.fromARGB(228, 56, 77, 87),
-                                fontSize: 20),
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Text(contato['Genero'],
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 88, 115, 128),
-                                  fontSize: 20))
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 40)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "País atual :",
-                            style: TextStyle(
-                                color: Color.fromARGB(228, 56, 77, 87),
-                                fontSize: 20),
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Text(contato['Pais'],
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 88, 115, 128),
-                                  fontSize: 20))
-                        ],
-                      ),
+                      ProfileField(
+                          label: "Nome Completo :", text: contato['Nome']),
+                      ProfileField(
+                          label: "Email de contato :", text: contato['Email']),
+                      ProfileField(label: "Numero :", text: contato['Numero']),
+                      ProfileField(label: "Genero :", text: contato['Genero']),
+                      ProfileField(label: "País :", text: contato['Pais']),
                     ],
                   ),
                 ),

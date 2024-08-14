@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/Controller/login_verify.dart';
 
-import 'package:recipes/View/viewResources/theme/n_tema.dart';
+import 'package:recipes/Services/n_tema.dart';
+import 'package:recipes/Services/storage_service.dart';
 import 'package:recipes/View/viewResources/firebase_options.dart';
 
 void main() async {
@@ -12,9 +13,12 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
-    ChangeNotifierProvider(
-      //mudança de temas
-      create: (context) => ThemeNotifier(),
+    MultiProvider(
+      //oermite utilizar varios providers na minha aplicação
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+        ChangeNotifierProvider(create: (_) => StorageService()),
+      ],
       child: const MyApp(),
     ),
   );
