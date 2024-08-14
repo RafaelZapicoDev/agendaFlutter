@@ -15,6 +15,10 @@
 				</array>
 			</dict>
 		</array>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Allow acces to photo library</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Allow acces to the camera</string>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

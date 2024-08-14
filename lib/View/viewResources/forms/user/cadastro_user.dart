@@ -48,15 +48,6 @@ class CadastroUserState extends State<CadastroUser> {
       //CRIANDO E LOGANDO O USUARIO
 
       try {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.amber,
-            ));
-          },
-        );
         UserCredential user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: email.text.trim(), password: senha.text.trim());

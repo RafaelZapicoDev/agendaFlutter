@@ -211,7 +211,7 @@ class PerfilContatos extends StatelessWidget {
                                           contato['Nome'].toString(),
                                           style: const TextStyle(
                                               color: Colors.blueAccent,
-                                              fontSize: 30),
+                                              fontSize: 20),
                                         ),
                                         const Padding(
                                             padding: EdgeInsets.only(left: 15)),
