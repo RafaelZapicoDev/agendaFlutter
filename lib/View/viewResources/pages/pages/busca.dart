@@ -31,7 +31,7 @@ class BuscaState extends State<Busca> {
   ContatoService service = ContatoService();
   bool filterFavorite = false;
 
-  Future Busca() {
+  Future doBusca() {
     if (filterFavorite) {
       return service.listarContatosFavorite();
     } else {
@@ -81,7 +81,7 @@ class BuscaState extends State<Busca> {
 
       // Monta a lista com base na lista de contatos retornada do service
       body: FutureBuilder(
-        future: Busca(),
+        future: doBusca(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
