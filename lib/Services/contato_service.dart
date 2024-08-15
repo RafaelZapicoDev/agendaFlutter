@@ -17,12 +17,14 @@ class ContatoService {
 
   Future listarContatosFavorite() async {
     //retorna os contatos vinculados ao meu usuario
-    return await FirebaseFirestore.instance
+    var favoritos = await FirebaseFirestore.instance
         .collection('users')
         .doc(user)
         .collection('contatos')
-        .orderBy('Favorito')
+        .orderBy('Favorito', descending: true)
         .get();
+
+    return favoritos;
   }
 
   Future listarContatosId(String contatoId) async {
